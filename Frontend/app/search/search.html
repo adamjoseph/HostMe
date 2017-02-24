@@ -1,6 +1,13 @@
 
-<!--SearchController/RoomFactory-->
-<div>
-  <input ng-model="sc.City" type="text"></input>
-  <button ng-click="sc.getRooms()"type="button" class="btn btn-default btn-round">Search</button>
-</div>
+<div class="row" style="margin-top: 24px;">
+    <div class="col-xs-4" ng-repeat='data in sc.getRooms'>
+
+
+       <p>{{ data.PropertyName }} </p>
+
+
+        <!-- movieDetailId came from the state in ap.js -->
+        <div><a ui-sref="roomDetail({roomDetailDisply :  '{{data.AllDetails}}'  })">Look for More Details</a></div>
+    </div>
+    <!-- <pre>{{vm.movieresults | json}}</pre>  used this for checking the json-->
+    <div class="well" ui-view></div>

@@ -63,7 +63,6 @@
 
 
     })
-
     .run(['$rootScope', 'localStorageService', function($rootScope, localStorageService){
 
       // $rootScope,

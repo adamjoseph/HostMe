@@ -12,6 +12,7 @@
         var service = {
             getUser: getUser,
             addUser: addUser,
+            updateUser: updateUser
 
         };
 
@@ -38,6 +39,10 @@
 
         function addUser(user) {
           return $http.post(baseAPI + 'Users', user);
+        }
+
+        function updateUser(id, user) {
+          return $http.put(baseAPI + 'Users/' + id, user);
         }
 
     }
