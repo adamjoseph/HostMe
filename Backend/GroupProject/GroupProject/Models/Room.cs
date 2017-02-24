@@ -20,6 +20,7 @@ namespace GroupProject.Models
         public int Price { get; set; }
         public string PictureUrl { get; set; }
         public bool Private { get; set; }
+        public int RoomNumber { get; set; }
 
         public int GuestLimit { get; set; }
      

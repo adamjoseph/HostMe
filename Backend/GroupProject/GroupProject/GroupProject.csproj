@@ -155,6 +155,10 @@
     <Compile Include="Migrations\201702230058290_Fourth-Migration.Designer.cs">
       <DependentUpon>201702230058290_Fourth-Migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702241819027_Fifth-Migration.cs" />
+    <Compile Include="Migrations\201702241819027_Fifth-Migration.Designer.cs">
+      <DependentUpon>201702241819027_Fifth-Migration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Conversation.cs" />
     <Compile Include="Models\Favorite.cs" />
@@ -192,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702230058290_Fourth-Migration.resx">
       <DependentUpon>201702230058290_Fourth-Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702241819027_Fifth-Migration.resx">
+      <DependentUpon>201702241819027_Fifth-Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
