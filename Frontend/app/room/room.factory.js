@@ -20,7 +20,7 @@
           var defer = $q.defer();
           $http({
             method: 'GET',
-            url: 'http://localhost:51319/api/Rooms/Search',
+            url: baseAPI + 'Rooms/Search',
             params: search
           }).then(function(response) {
             defer.resolve(response);

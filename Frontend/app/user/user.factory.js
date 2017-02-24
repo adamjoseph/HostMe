@@ -11,7 +11,7 @@
     function UserFactory($http, $q, baseAPI) {
         var service = {
             getUser: getUser,
-            addUser: addUser,
+            // addUser: addUser,
 
         };
 
@@ -22,7 +22,7 @@
 
           $http({
             method: 'POST',
-            url: 'http://localhost:51319/api/Users/Login',
+            url: baseAPI + 'Users/Login',
             data: login
           }).then(
             function(response){
@@ -36,9 +36,9 @@
           return defer.promise;
         }
 
-        function addUser() {
-
-        }
+        // function addUser() {
+        //
+        // }
 
     }
 })();
