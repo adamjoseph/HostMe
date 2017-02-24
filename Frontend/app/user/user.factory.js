@@ -11,7 +11,7 @@
     function UserFactory($http, $q, baseAPI) {
         var service = {
             getUser: getUser,
-            // addUser: addUser,
+            addUser: addUser,
 
         };
 
@@ -36,9 +36,9 @@
           return defer.promise;
         }
 
-        // function addUser() {
-        //
-        // }
+        function addUser(user) {
+          return $http.post(baseAPI + 'Users', user);
+        }
 
     }
 })();

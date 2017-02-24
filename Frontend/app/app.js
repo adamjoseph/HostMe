@@ -11,9 +11,11 @@
         .config(function(socialProvider){
           socialProvider.setFbKey({appId: "1288453837908680", apiVersion: "v2.8"})
         })
+
+
         .config(function($stateProvider, $urlRouterProvider){
       //More any unmatched URL set up default route to main
-      $urlRouterProvider.otherwise('/signin');
+      $urlRouterProvider.otherwise('/search');
 
       $stateProvider
 			.state('search', {
@@ -52,11 +54,31 @@
 				controller: "RoomController",
 				controllerAs: "rc"
 			})
-      // .state('', {
-			// 	url: "",
-			// 	templateUrl: "",
-			// 	controller: "",
-			// 	controllerAs: ""
-			// })
+      .state('createRoom', {
+				url: "/createRoom",
+				templateUrl: "app/room/create.room.html",
+				controller: "RoomController",
+				controllerAs: "rm"
+			})
+
+
     })
+
+    .run(['$rootScope', 'localStorageService', function($rootScope, localStorageService){
+
+      // $rootScope,
+      // $state
+      // rootScope handler for when user changes states
+            $rootScope.$on('$stateChangeStart', function() {
+
+               // check if user id is stored
+                var isLogin = localStorageService.get("storedUserId");
+                if(isLogin === null){
+
+                   // Jump to login page
+                   $location.path('/signin');
+                }
+
+           })}]
+    )
 })();
