@@ -40,6 +40,7 @@
         $rootScope.$on('event:social-sign-in-success', function(event, userDetails){
 
           uc.userDetails = userDetails;
+          console.log(userDetails);
 
           var login = {'Email': userDetails.email, 'Password': userDetails.uid};
 

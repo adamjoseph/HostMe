@@ -34,22 +34,22 @@
 
 
 
-        function getEachRoomData() {
-            RoomFactory.getRoomDetail($stateParams.roomDetailDisply).then(
-                function(response) {
-                    sc.detailresults = response.data;
-                    console.log(vm.detailresults);
-                },
-                function(error) {
-                    if (error.data) {
-                        console.log("there was a problem: " + error.data);
-                    } else {
-                        console.log('no data found.');
-                    }
-                }
-
-           )
-        };
-        getEachRoomData();
+        // function getEachRoomData() {
+        //     RoomFactory.getRoomDetail($stateParams.roomDetailDisply).then(
+        //         function(response) {
+        //             sc.detailresults = response.data;
+        //             console.log(vm.detailresults);
+        //         },
+        //         function(error) {
+        //             if (error.data) {
+        //                 console.log("there was a problem: " + error.data);
+        //             } else {
+        //                 console.log('no data found.');
+        //             }
+        //         }
+        //
+        //    )
+        // };
+        // getEachRoomData();
     }
 })();
