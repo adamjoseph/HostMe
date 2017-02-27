@@ -5,10 +5,10 @@
         .module('app')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['RoomFactory', '$state'];
+    SearchController.$inject = ['RoomFactory', '$state', '$stateParams'];
 
     /* @ngInject */
-    function SearchController(RoomFactory, $state) {
+    function SearchController(RoomFactory, $state, $stateParams) {
         var sc = this;
         sc.title= 'SearchController'
         sc.getRooms = getRooms;
@@ -24,6 +24,9 @@
           }
           RoomFactory.getRooms(roomObject).then(
             function(response) {
+
+                sc.ReturnRoom = response.data;
+
               console.log(response);
             },
             function(error){
@@ -34,22 +37,11 @@
 
 
 
-        function getEachRoomData() {
-            RoomFactory.getRoomDetail($stateParams.roomDetailDisply).then(
-                function(response) {
-                    sc.detailresults = response.data;
-                    console.log(vm.detailresults);
-                },
-                function(error) {
-                    if (error.data) {
-                        console.log("there was a problem: " + error.data);
-                    } else {
-                        console.log('no data found.');
-                    }
-                }
 
-           )
-        };
-        getEachRoomData();
+
+
+
+
+
     }
 })();

@@ -1,0 +1,28 @@
+<div class="container">
+    <table id="searchResults" class="table table-bordered ">
+
+<!--     RoomController, object from the first search function, passed in app.js  -->
+        <h4> {{ rc.AllRoomDetail.roomName }} </h4>
+        <img ng-src="{{rc.AllRoomDetail.pictureUrl}}">
+        <tr>
+           
+            <th>Price:</th>
+            <th>Number of bedrooms:</th>
+            <th>Guest Limit:</th>
+            <th>Address </th>
+            <th>City:</th>
+            <th>State:</th>
+           
+        </tr>
+        <td> ${{rc.AllRoomDetail.price}}</td>
+        <td> {{rc.AllRoomDetail.roomNumber}}</td>
+        <td> {{rc.AllRoomDetail.guestLimit}}</td>
+        <td> {{rc.AllRoomDetail.address}}</td>
+        <td> {{rc.AllRoomDetail.city}}</td>
+        <td> {{rc.AllRoomDetail.state}}</td>
+        </tr>
+    </table>
+    <h4> Property &#38 Host Description</h4>
+    <p>{{rc.AllRoomDetail.description}}</p>
+</div>
+
