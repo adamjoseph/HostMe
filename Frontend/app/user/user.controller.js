@@ -39,9 +39,11 @@
         } //close getUser
 
         //Event for successful FB login
+
         $rootScope.$on('event:social-sign-in-success', function(event, userDetails) {
 
                 uc.userDetails = userDetails;
+                console.log(userDetails);
 
                 var login = { 'Email': userDetails.email, 'Password': userDetails.uid };
 
@@ -63,6 +65,7 @@
                         console.log(error);
                     });
             }) //close rootScope
+
 
         //Add user with FB response data
         function addFacebookUser(userDetails) {
@@ -134,8 +137,7 @@
                 'Zip': uc.zip,
                 'ContactPhone': uc.phone,
                 'BirthDate': uc.bday,
-                'Password': uc.password
-,
+                'Password': uc.password,
                 'ProfilePic': uc.pic,
                 'UserId': storedUserId
             }

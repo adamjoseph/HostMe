@@ -50,8 +50,9 @@
                     controller: "MessageController",
                     controllerAs: "mc"
                 })
-                .state('roomDetail', {
-                    url: "/roomDetail",
+
+            .state('roomDetail', {
+                    url: "/roomDetail/:roomDetailDisplay",
                     templateUrl: "app/room/room.detail.html",
                     controller: "RoomController",
                     controllerAs: "rc"
@@ -65,25 +66,25 @@
 
 
         })
+        //['$rootScope', 'localStorageService',
         .run(function($rootScope,
-            localStorageService,
-            $state,
-            $location
-        ) {
+                localStorageService,
+                $state,
+                $location) {
+                // rootScope handler for when user changes states
 
-            // $rootScope,
-            // $state
-            // rootScope handler for when user changes states
-            $rootScope.$on('$stateChangeStart', function() {
+                $rootScope.$on('$stateChangeStart', function() {
 
-                // check if user id is stored
-                var isLogin = localStorageService.get("storedUserId");
-                if (isLogin === null) {
+                    // check if user id is stored
+                    var isLogin = localStorageService.get("storedUserId");
+                    if (isLogin === null) {
 
-                    // Jump to login page
-                    $location.path('/signin');
-                }
+                        // Jump to login page
+                        $location.path('/signin');
+                    }
 
-            })
-        })
+                })
+            } //]
+        )
+
 })();

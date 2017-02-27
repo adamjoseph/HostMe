@@ -5,15 +5,16 @@
         .module('app')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['RoomFactory', '$state'];
+    SearchController.$inject = ['RoomFactory', '$state', '$stateParams'];
 
     /* @ngInject */
-    function SearchController(RoomFactory, $state) {
+    function SearchController(RoomFactory, $state, $stateParams) {
         var sc = this;
         sc.title = 'SearchController'
         sc.getRooms = getRooms;
 
         function getRooms() {
+
             var roomObject = {
                 'City': sc.City,
                 'Zip': sc.Zip,
@@ -24,6 +25,9 @@
             }
             RoomFactory.getRooms(roomObject).then(
                 function(response) {
+
+                    sc.ReturnRoom = response.data;
+
                     console.log(response);
                 },
                 function(error) {
@@ -31,5 +35,14 @@
                 }
             )
         } //close getRooms
+
+
+
+
+
+
+
+
+
     }
 })();
