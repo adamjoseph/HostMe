@@ -10,46 +10,26 @@
     /* @ngInject */
     function SearchController(RoomFactory, $state) {
         var sc = this;
-        sc.title= 'SearchController'
+        sc.title = 'SearchController'
         sc.getRooms = getRooms;
 
         function getRooms() {
-          var roomObject = {
-            'City': sc.City,
-            'Zip': sc.Zip,
-            'MaxPrice': sc.MaxPrice,
-            'GuestLimit': sc.GuestLimit,
-            'Keyword': sc.Keyword,
-            'Private': sc.Private
-          }
-          RoomFactory.getRooms(roomObject).then(
-            function(response) {
-              console.log(response);
-            },
-            function(error){
-              console.log(error);
+            var roomObject = {
+                'City': sc.City,
+                'Zip': sc.Zip,
+                'MaxPrice': sc.MaxPrice,
+                'GuestLimit': sc.GuestLimit,
+                'Keyword': sc.Keyword,
+                'Private': sc.Private
             }
-          )
-        }//close getRooms
-
-
-
-        function getEachRoomData() {
-            RoomFactory.getRoomDetail($stateParams.roomDetailDisply).then(
+            RoomFactory.getRooms(roomObject).then(
                 function(response) {
-                    sc.detailresults = response.data;
-                    console.log(vm.detailresults);
+                    console.log(response);
                 },
                 function(error) {
-                    if (error.data) {
-                        console.log("there was a problem: " + error.data);
-                    } else {
-                        console.log('no data found.');
-                    }
+                    console.log(error);
                 }
-
-           )
-        };
-        getEachRoomData();
+            )
+        } //close getRooms
     }
 })();

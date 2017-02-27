@@ -1,0 +1,124 @@
+<!-- fires viewUser function on page load -->
+<div data-ng-init="uc.viewUser()">
+    <!-- Profile Container for Viewing Profile Panel-->
+    <div class="container">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3>{{uc.firstName}}{{" "}}{{uc.lastName}}</h3>
+            </div>
+            <div class="panel-body" ng-hide="editing">
+                <div class="row">
+                    <div class="col-md-3 col-lg-6" align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+                    <div class=" col-md-9 col-lg-5 ">
+                        <table class="table table-user-information">
+                            <tbody>
+                                <tr>
+                                    <td>First Name:</td>
+                                    <td>{{uc.firstName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Last Name:</td>
+                                    <td>{{uc.lastName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Date of Birth</td>
+                                    <td>{{uc.birthDate}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>{{uc.email}}</td>
+                                </tr>
+                                <tr>
+                                    <td>User Name</td>
+                                    <td>{{uc.userName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phone Number</td>
+                                    <td>{{uc.contactPhone}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Zip</td>
+                                    <td>{{uc.zip}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer" ng-hide="editing">
+                <a href="" ng-click="editing = !editing" type="button" class="btn btn-m btn-warning"><i class="glyphicon glyphicon-edit"> Edit</i></a>
+                </i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div ng-show="editing" ng-hide="!editing">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3 col-lg-6 " align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"></div>
+                <div class=" col-md-9 col-lg-5 ">
+                    <table class="table table-user-information">
+                        <tbody>
+                            <tr>
+                                <td>First Name:</td>
+                                <td>
+                                    <input ng-model="uc.fname" placeholder={{uc.firstName}}></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last Name:</td>
+                                <td>
+                                    <input ng-model="uc.lname" placeholder={{uc.lastName}}></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Date of Birth</td>
+                                <td>
+                                    <input ng-model="uc.bday" placeholder={{uc.birthDay}}></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td>
+                                    <input ng-model="uc.email" placeholder={{uc.email}}></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>User Name</td>
+                                <td>
+                                    <input ng-model="uc.uname" placeholder={{uc.userName}}></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Phone Number</td>
+                                <td>
+                                    <input ng-model="uc.phone" placeholder={{uc.contactPhone}}></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Zip</td>
+                                <td>
+                                    <input ng-model="uc.zip" placeholder={{uc.zip}}></input>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div>
+                <button class="btn-primary" ng-click="uc.updateUser()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- to do
+
+	1. attach password to update when sending changes
+	2. add filepicker
+	3. format profile with messages
+	4. add rooms
+	 -->

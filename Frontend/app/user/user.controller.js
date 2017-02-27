@@ -5,7 +5,7 @@
         .module('app')
         .controller('UserController', UserController);
 
-    UserController.$inject = ['UserFactory', '$state', '$rootScope','localStorageService'];
+    UserController.$inject = ['UserFactory', '$state', '$rootScope', 'localStorageService'];
 
     /* @ngInject */
     function UserController(UserFactory, $state, $rootScope, localStorageService) {
@@ -13,114 +13,166 @@
         uc.getUser = getUser;
         uc.addUser = addUser;
         uc.addFacebookUser = addFacebookUser;
+        uc.updateUser = updateUser;
+        uc.viewUser = viewUser;
 
         function getUser() {
 
-          var login = {'Email': uc.email, 'Password': uc.password};
+            var login = { 'Email': uc.email, 'Password': uc.password };
 
-          UserFactory.getUser(login).then(
-            function(response){
-              if(response.data[0]== null){
+            UserFactory.getUser(login).then(
+                function(response) {
+                    if (response.data[0] == null) {
 
-                $state.go('register');
-              } else {
-                localStorageService.set('storedUserId',response.data[0].userId);
-                console.log(localStorageService.get('storedUserId'));
+                        $state.go('register');
+                    } else {
+                        localStorageService.set('storedUserId', response.data[0].userId);
+                        console.log(localStorageService.get('storedUserId'));
 
-                console.log('user exists');
-                $state.go('search');
-              }
-            },
-            function(error){
-              console.log(error);
-            });
-        }//close getUser
+                        console.log('user exists');
+                        $state.go('search');
+                    }
+                },
+                function(error) {
+                    console.log(error);
+                });
+        } //close getUser
 
         //Event for successful FB login
-        $rootScope.$on('event:social-sign-in-success', function(event, userDetails){
+        $rootScope.$on('event:social-sign-in-success', function(event, userDetails) {
 
-          uc.userDetails = userDetails;
+                uc.userDetails = userDetails;
 
-          var login = {'Email': userDetails.email, 'Password': userDetails.uid};
+                var login = { 'Email': userDetails.email, 'Password': userDetails.uid };
 
-          UserFactory.getUser(login).then(
-            function(response){
-              console.log(response);
-              //check user email/password to see if exists
-              if(response.data[0]== null){
-                //Go create new user
-                addFacebookUser(uc.userDetails);
-                $state.go('profile');
-              } else {
-                localStorageService.set('storedUserId',response.data[0].userId);
-                console.log('user exists');
-                $state.go('search');
-              }
-            },
-            function(error){
-              console.log(error);
-            });
-        })//close rootScope
+                UserFactory.getUser(login).then(
+                    function(response) {
+                        console.log(response);
+                        //check user email/password to see if exists
+                        if (response.data[0] == null) {
+                            //Go create new user
+                            addFacebookUser(uc.userDetails);
+                            $state.go('profile');
+                        } else {
+                            localStorageService.set('storedUserId', response.data[0].userId);
+                            console.log('user exists');
+                            $state.go('search');
+                        }
+                    },
+                    function(error) {
+                        console.log(error);
+                    });
+            }) //close rootScope
 
         //Add user with FB response data
         function addFacebookUser(userDetails) {
-          console.log(userDetails);
+            console.log(userDetails);
 
-          //Separate User's first name and last name
-          var fname = userDetails.name.split(' ')[0];
-          var lname = userDetails.name.split(' ')[1];
+            //Separate User's first name and last name
+            var fname = userDetails.name.split(' ')[0];
+            var lname = userDetails.name.split(' ')[1];
 
-          //Construct user object
-          var user = {
-                      'FirstName': fname,
-                      'LastName': lname,
-                      'Email': userDetails.email,
-                      'Password': userDetails.uid,
-                      'ProfilePic': userDetails.imageUrl
-          };
-
-          //Pass user object to factory function
-          UserFactory.addUser(user).then(
-            function(response){
-              console.log(response);
-            },
-            function(error){
-              console.log(error);
-            }
-          )
-        }//close addFacebookUser
-
-        function addUser(){
-
-        //check if passwords match
-        if(uc.password == uc.confirm){
+            //Construct user object
             var user = {
-                        'FirstName': uc.fname,
-                        'LastName': uc.lname,
-                        'Email': uc.email,
-                        'UserName': uc.uname,
-                        'Zip': uc.zip,
-                        'ContactPhone': uc.phone,
-                        'BirthDate': uc.bday,
-                        'Password': uc.password,
-                        'ProfilePic': uc.pic
-                        }
+                'FirstName': fname,
+                'LastName': lname,
+                'Email': userDetails.email,
+                'Password': userDetails.uid,
+                'ProfilePic': userDetails.imageUrl
+            };
 
+            //Pass user object to factory function
             UserFactory.addUser(user).then(
-              function(response){
-                console.log(response);
-                $('input').val('');
-              },
-              function(error){
-                console.log(error);
-              }
+                function(response) {
+                    console.log(response);
+                },
+                function(error) {
+                    console.log(error);
+                }
             )
-          } else{
-            console.log('Passwords do not match');
-          }//close if/else
-        }//close addUser
+        } //close addFacebookUser
+
+        function addUser() {
+
+            //check if passwords match
+            if (uc.password == uc.confirm) {
+                var user = {
+                    'FirstName': uc.fname,
+                    'LastName': uc.lname,
+                    'Email': uc.email,
+                    'UserName': uc.uname,
+                    'Zip': uc.zip,
+                    'ContactPhone': uc.phone,
+                    'BirthDate': uc.bday,
+                    'Password': uc.password,
+                    'ProfilePic': uc.pic
+                }
+
+                UserFactory.addUser(user).then(
+                    function(response) {
+                        console.log(response);
+                        $('input').val('');
+                    },
+                    function(error) {
+                        console.log(error);
+                    }
+                )
+            } else {
+                console.log('Passwords do not match');
+            } //close if/else
+        } //close addUser
+
+        //Update User Profile with -->function updateUser(id, user)
+        function updateUser() {
+
+            var storedUserId = localStorageService.get("storedUserId");
+            var user = {
+                'FirstName': uc.fname,
+                'LastName': uc.lname,
+                'Email': uc.email,
+                'UserName': uc.uname,
+                'Zip': uc.zip,
+                'ContactPhone': uc.phone,
+                'BirthDate': uc.bday,
+                'Password': uc.password
+,
+                'ProfilePic': uc.pic,
+                'UserId': storedUserId
+            }
+            UserFactory.updateUser(storedUserId, user).then(
+                function(response) {
+                    console.log(response)
+                },
+                function(error) {
+                    console.log(error)
+                }
+            )
+        }
+        //viewUser
+        function viewUser() {
+            var storedUserId = localStorageService.get("storedUserId");
+
+            UserFactory.viewUser(storedUserId).then(
+                function(response) {
+                    uc.userObject = response.data.userId;
+                    uc.firstName = response.data.firstName;
+                    uc.lastName = response.data.lastName;
+                    uc.email = response.data.email;
+                    uc.userName = response.data.userName;
+                    uc.zip = response.data.zip;
+                    uc.contactPhone = response.data.contactPhone;
+                    uc.birthDate = response.data.birthDate;
+
+                    console.log(response.data);
+
+                },
+
+                function(error) {
+                    console.log(error)
+                }
+            )
+        }
 
 
-
-    }//close UserController
+    } //close UserController
 })();
