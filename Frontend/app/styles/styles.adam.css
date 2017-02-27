@@ -1,0 +1,22 @@
+.signin-icon {
+  margin:30px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-color {
+  background-color: #5A7D7C;
+  color: #fff;
+}
+
+.nav-style {
+  background-color: #5A7D7C;
+}
+
+.nav-style a {
+  color: #fff;
+}
+
+.profile-img {
+  border-radius: 25px;
+}

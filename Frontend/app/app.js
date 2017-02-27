@@ -64,10 +64,11 @@
 
 
     })
-    .run(['$rootScope', 'localStorageService', function($rootScope, localStorageService){
-
-      // $rootScope,
-      // $state
+    //['$rootScope', 'localStorageService',
+    .run(function($rootScope,
+                  localStorageService,
+                  $state,
+                  $location){
       // rootScope handler for when user changes states
             $rootScope.$on('$stateChangeStart', function() {
 
@@ -79,6 +80,6 @@
                    $location.path('/signin');
                 }
 
-           })}]
+           })}//]
     )
 })();
