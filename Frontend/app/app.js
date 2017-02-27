@@ -49,7 +49,7 @@
 				controllerAs: "mc"
 			})
       .state('roomDetail', {
-				url: "/roomDetail",
+				url: "/roomDetail/:roomDetailDisplay",
 				templateUrl: "app/room/room.detail.html",
 				controller: "RoomController",
 				controllerAs: "rc"
