@@ -1,44 +1,45 @@
+<div ng-include="'app/partials/nav.user.html'"></div>
 <!-- fires viewUser function on page load -->
 <div data-ng-init="uc.viewUser()">
     <!-- Profile Container for Viewing Profile Panel-->
     <div class="container">
         <div class="panel panel-info">
             <div class="panel-heading">
-                <h3>{{uc.firstName}}{{" "}}{{uc.lastName}}</h3>
+                <h3>{{uc.user.firstName}} {{uc.user.lastName}}</h3>
             </div>
             <div class="panel-body" ng-hide="editing">
                 <div class="row">
-                    <div class="col-md-3 col-lg-6" align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+                    <div class="col-md-3 col-lg-6" align="center"> <img alt="User Pic" src="{{ uc.user.profilePic }}" class="img-circle img-responsive"> </div>
                     <div class=" col-md-9 col-lg-5 ">
                         <table class="table table-user-information">
                             <tbody>
                                 <tr>
                                     <td>First Name:</td>
-                                    <td>{{uc.firstName}}</td>
+                                    <td>{{uc.user.firstName}}</td>
                                 </tr>
                                 <tr>
                                     <td>Last Name:</td>
-                                    <td>{{uc.lastName}}</td>
+                                    <td>{{uc.user.lastName}}</td>
                                 </tr>
                                 <tr>
                                     <td>Date of Birth</td>
-                                    <td>{{uc.birthDate}}</td>
+                                    <td>{{uc.user.birthDate}}</td>
                                 </tr>
                                 <tr>
                                     <td>Email</td>
-                                    <td>{{uc.email}}</td>
+                                    <td>{{uc.user.email}}</td>
                                 </tr>
                                 <tr>
                                     <td>User Name</td>
-                                    <td>{{uc.userName}}</td>
+                                    <td>{{uc.user.userName}}</td>
                                 </tr>
                                 <tr>
                                     <td>Phone Number</td>
-                                    <td>{{uc.contactPhone}}</td>
+                                    <td>{{uc.user.contactPhone}}</td>
                                 </tr>
                                 <tr>
                                     <td>Zip</td>
-                                    <td>{{uc.zip}}</td>
+                                    <td>{{uc.user.zip}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -46,7 +47,10 @@
                 </div>
             </div>
             <div class="panel-footer" ng-hide="editing">
-                <a href="" ng-click="editing = !editing" type="button" class="btn btn-m btn-warning"><i class="glyphicon glyphicon-edit"> Edit</i></a>
+                <a href="" ng-click="editing = !editing" type="button" class="btn btn-m btn-color"><i class="glyphicon glyphicon-edit"> Edit</i></a>
+                </i>
+                </a>
+                <a ui-sref="createRoom" type="button" class="btn btn-m btn-color"><i class="fa fa-bed" aria-hidden="true"> Add Room</i></a>
                 </i>
                 </a>
             </div>
@@ -57,52 +61,57 @@
     <div ng-show="editing" ng-hide="!editing">
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-3 col-lg-6 " align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"></div>
+                <div class="col-md-3 col-lg-6 " align="center"> <img alt="User Pic" src="{{ uc.user.profilePic }}" class="img-circle img-responsive"></div>
+                <div>
+                  <button class="btn btn-color" ng-click="uc.pickFile()"><i class="fa fa-camera-retro" aria-hidden="true"></i> Profile Pic</button>
+                </div>
                 <div class=" col-md-9 col-lg-5 ">
                     <table class="table table-user-information">
                         <tbody>
                             <tr>
                                 <td>First Name:</td>
                                 <td>
-                                    <input ng-model="uc.fname" placeholder={{uc.firstName}}></input>
+                                    <input ng-model="uc.user.firstName"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Last Name:</td>
                                 <td>
-                                    <input ng-model="uc.lname" placeholder={{uc.lastName}}></input>
+                                    <input ng-model="uc.user.lastName"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Date of Birth</td>
                                 <td>
-                                    <input ng-model="uc.bday" placeholder={{uc.birthDay}}></input>
+                                    <input ng-model="uc.user.birthDate"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Email</td>
                                 <td>
-                                    <input ng-model="uc.email" placeholder={{uc.email}}></input>
+                                    <input ng-model="uc.user.email"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>User Name</td>
                                 <td>
-                                    <input ng-model="uc.uname" placeholder={{uc.userName}}></input>
+                                    <input ng-model="uc.user.userName"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Phone Number</td>
                                 <td>
-                                    <input ng-model="uc.phone" placeholder={{uc.contactPhone}}></input>
+                                    <input ng-model="uc.user.contactPhone"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Zip</td>
+
                                 <td>
-                                    <input ng-model="uc.zip" placeholder={{uc.zip}}></input>
+                                    <input ng-model="uc.user.zip"></input>
                                 </td>
                             </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -110,7 +119,7 @@
         </div>
         <div class="panel-footer">
             <div>
-                <button class="btn-primary" ng-click="uc.updateUser()">Save Changes</button>
+                <button class=" btn btn-color" ng-click="uc.updateUser(uc.user)">Save Changes</button>
             </div>
         </div>
     </div>

@@ -4,6 +4,8 @@
     angular
         .module('app', ['ui.router', 'LocalStorageModule', 'oitozero.ngSweetAlert', 'angular-filepicker', 'socialLogin'])
         .value("baseAPI", "http://localhost:51319/api/")
+        .value("basicNav", 'app/partials/nav.basic.html')
+        .value("userNav", 'app/partials/nav.user.html')
         .config(function(filepickerProvider) {
             filepickerProvider.setKey('AWJJfgMMsQpqiG5ZJI3Kwz')
         })
@@ -61,12 +63,11 @@
                     url: "/createRoom",
                     templateUrl: "app/room/create.room.html",
                     controller: "RoomController",
-                    controllerAs: "rm"
+                    controllerAs: "rc"
                 })
 
 
         })
-        //['$rootScope', 'localStorageService',
         .run(function($rootScope,
                 localStorageService,
                 $state,
@@ -74,17 +75,28 @@
                 // rootScope handler for when user changes states
 
                 $rootScope.$on('$stateChangeStart', function() {
-
+                //  var userNav = $rootScope.userNav;
                     // check if user id is stored
                     var isLogin = localStorageService.get("storedUserId");
                     if (isLogin === null) {
-
-                        // Jump to login page
+                      // console.log(isLogin)
+                      // console.log('hit')
+                        // userNav = false;
                         $location.path('/signin');
                     }
-
+                    else {
+                      // userNav = true
+                      // console.log('work!')
+                      // console.log(userNav)
+                    }
                 })
-            } //]
+
+                $rootScope.logOut = function(){
+                  localStorageService.clearAll();
+                  $state.go("search");
+                }
+
+            }
         )
 
 })();

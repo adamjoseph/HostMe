@@ -5,10 +5,10 @@
         .module('app')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['RoomFactory', '$state', '$stateParams'];
+    SearchController.$inject = ['RoomFactory', '$state', '$stateParams', '$rootScope'];
 
     /* @ngInject */
-    function SearchController(RoomFactory, $state, $stateParams) {
+    function SearchController(RoomFactory, $state, $stateParams, $rootScope) {
         var sc = this;
         sc.title = 'SearchController'
         sc.getRooms = getRooms;
