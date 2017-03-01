@@ -5,12 +5,13 @@
         .module('app')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['RoomFactory', '$state', '$stateParams', '$rootScope'];
+    SearchController.$inject = ['RoomFactory', '$state', '$stateParams', '$rootScope', 'localStorageService'];
 
     /* @ngInject */
-    function SearchController(RoomFactory, $state, $stateParams, $rootScope) {
+    function SearchController(RoomFactory, $state, $stateParams, $rootScope, localStorageService) {
         var sc = this;
         sc.title = 'SearchController'
+        sc.storeRoomId = storeRoomId;
         sc.getRooms = getRooms;
 
         function getRooms() {
@@ -36,6 +37,11 @@
             )
         } //close getRooms
 
+        function storeRoomId(id){
+
+          localStorageService.set("roomId", id);
+          $state.go("roomDetail");
+        }
 
 
 

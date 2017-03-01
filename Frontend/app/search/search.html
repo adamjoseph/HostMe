@@ -7,17 +7,17 @@
 </div>
 <!-- <div class="row" style="margin-top: 24px;"> -->
 <!--    <div class="col-xs-4" ng-repeat='data in sc.ReturnRoom'> -->
-<div ng-repeat='data in sc.ReturnRoom'>
+<div ng-repeat='room in sc.ReturnRoom'>
     <!-- <p> <img ng-src="{{data.pictureUrl}}" height="62" width="100"> </p> -->
     <div class="row">
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
-                <img ng-src="{{data.pictureUrl}}">
+                <img ng-src="{{room.pictureUrl}}">
                 <div class="caption">
-                    <h4>{{ data.roomName }} </h4>
-                    <p>${{ data.price }}</p>
+                    <h4>{{ room.roomName }} </h4>
+                    <p>${{ room.price }}</p>
                     <!-- roomDetailDisplay passed in the state in ap.js -->
-                    <p> <a class="btn btn-default" role="button" ui-sref="roomDetail({roomDetailDisplay :  '{{data}}'  })">More Details</a>
+                    <p> <a class="btn btn-default" role="button" ng-click="sc.storeRoomId(room.roomId)">More Details</a>
                     </p>
                 </div>
             </div>
@@ -26,4 +26,4 @@
     <!-- roomDetailDisplay passed in the state in ap.js -->
     <!--   <div><a ui-sref="roomDetail({roomDetailDisplay :  '{{data}}'  })">Look for More Details</a></div> -->
 </div>
-<div class="well" ui-view></div>
+<!-- <div class="well" ui-view></div> -->

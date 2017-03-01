@@ -5,13 +5,20 @@
         .module('app')
         .controller('RoomController', RoomController);
 
-    RoomController.$inject = ['$state', 'RoomFactory', '$stateParams', 'filepickerService'];
+    RoomController.$inject = ['$state', 'RoomFactory', '$stateParams', 'filepickerService', 'localStorageService', 'SweetAlert'];
 
     /* @ngInject */
-    function RoomController($state, RoomFactory, $stateParams, filepickerService) {
+    function RoomController($state, RoomFactory, $stateParams, filepickerService, localStorageService, SweetAlert) {
         var rc = this;
         rc.addRoom = addRoom;
         rc.pickFile = pickFile;
+        rc.getRoom = getRoom;
+
+        if(localStorageService.get("roomId")){
+
+          getRoom();
+
+        };
 
 //After brought in from first function, went from object to a string, angular method converted back to object
         // rc.AllRoomDetail =  angular.fromJson($stateParams.roomDetailDisplay);
@@ -37,7 +44,7 @@
                 RoomFactory.addRoom(room).then(
                     function(response) {
                       console.log(response);
-                        SweetAlert.swal("Room Added!" + user.firstName, "", "success");
+                        SweetAlert.swal("Room Added!", "", "success");
                         $('input').val('');
                     },
                     function(error) {
@@ -59,5 +66,19 @@
             )
           }//close pickFile
 
+          function getRoom(){
+
+            var id = localStorageService.get("roomId");
+
+            RoomFactory.getRoomById(id).then(
+              function(response){
+
+                rc.room = response.data;
+              },
+              function(error){
+                console.log(error);
+              }
+            )
+          }
     }
 })();

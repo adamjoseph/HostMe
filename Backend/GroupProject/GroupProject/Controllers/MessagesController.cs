@@ -17,6 +17,29 @@ namespace GroupProject.Controllers
     {
         private DataContext db = new DataContext();
 
+        //Get User's messages
+        [Route("api/UserMessages")]
+        [HttpGet]
+        public IQueryable<ICollection<Message>> GetUserMessages(int id)
+        {
+            //IQueryable<Message> allMessages = db.Messages;
+
+            //var convId = db.Conversations.Select(c => c.ConversationId).Where(c => c.ReceiverUserId == id);
+
+            var allMessages = from d in db.Conversations
+                                                where d.ReceiverUserId == id
+                                                select d.Messages;
+
+            //allMessages = allMessages.Contains(m => m.ConversationId == convIds);
+
+            //allMessages = from m in db.Messages
+            //              where( from d in db.Conversations select d.ConversationId)
+            //              .Contains( d.ReceiverUserId == id)
+            //              select m;
+
+            return allMessages;
+        }
+
         // GET: api/Messages
         public IQueryable<Message> GetMessages()
         {

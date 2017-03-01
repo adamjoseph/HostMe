@@ -1,0 +1,25 @@
+<div ng-include="'app/partials/nav.user.html'"></div>
+
+<div class="container">
+    <div class="panel panel-info" ng-repeat="c in mc.conversations">
+        <div class="panel-body">
+            <div class="col-s-3">
+                <img ng-src={{c[0].conversation.sender.profilePic}} height= "150" width = "150" alt="">
+            </div>
+            <div "col-s-8">
+                <table class="table table-striped" >
+                  <tr ng-repeat="m in mc.conversations[$index]">
+                      <td>{{ m.conversation.sender.firstName}} {{ m.conversation.sender.lastName}}</td>
+                      <td>{{m.subject}}</td>
+                      <td>{{m.dateCreated | date}}</td>
+                      <td><textarea  cols="10" rows="5" ng-model="mc.body"></textarea></td>
+                      <td><button ng-click="mc.replyMessage(m)">Reply</button>
+                      </td>
+                  </tr>
+                </table>
+
+
+            </div>
+       </div>
+    </div>
+</div>

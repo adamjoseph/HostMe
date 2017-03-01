@@ -169,8 +169,10 @@
                 function(response) {
 
                    uc.user = response.data;
-
-                    console.log(uc.user);
+                   uc.lname = uc.user.lastName;
+                   uc.conversations = uc.user.conversations;
+                   console.log(uc.conversations);
+                   console.log(uc.user);
 
                 },
 
