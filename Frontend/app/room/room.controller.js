@@ -5,29 +5,24 @@
         .module('app')
         .controller('RoomController', RoomController);
 
-    RoomController.$inject = ['$state', 'RoomFactory', '$stateParams', 'filepickerService', 'localStorageService', 'SweetAlert'];
+    RoomController.$inject = ['$state', 'RoomFactory','MessageFactory', '$stateParams', 'filepickerService', 'localStorageFactory', 'SweetAlert'];
 
     /* @ngInject */
-    function RoomController($state, RoomFactory, $stateParams, filepickerService, localStorageService, SweetAlert) {
+    function RoomController($state, RoomFactory, MessageFactory, $stateParams, filepickerService, localStorageFactory, SweetAlert) {
         var rc = this;
         rc.addRoom = addRoom;
         rc.pickFile = pickFile;
         rc.getRoom = getRoom;
+        rc.sendMessage = sendMessage;
 
-        if(localStorageService.get("roomId")){
-
+        if(localStorageFactory.getKey("roomId")){
           getRoom();
-
         };
-
-//After brought in from first function, went from object to a string, angular method converted back to object
-        // rc.AllRoomDetail =  angular.fromJson($stateParams.roomDetailDisplay);
-        // console.log(rc.AllRoomDetail.roomName)
 
         function addRoom() {
 
                 var room = {
-                    'UserId': localStorageService.get("storedUserId"),
+                    'UserId': localStorageFactory.getKey("storedUserId"),
                     'RoomName': rc.rName,
                     'Description': rc.description,
                     'Address': rc.address,
@@ -49,9 +44,7 @@
                     },
                     function(error) {
                         console.log(error);
-                    }
-                )
-
+                    })
         } //close addUser
 
         function pickFile(){
@@ -68,11 +61,10 @@
 
           function getRoom(){
 
-            var id = localStorageService.get("roomId");
+            var id = localStorageFactory.getKey("roomId");
 
             RoomFactory.getRoomById(id).then(
               function(response){
-
                 rc.room = response.data;
               },
               function(error){
@@ -80,5 +72,44 @@
               }
             )
           }
+
+          function sendMessage(id){
+            //construct conversation
+
+            var conversation = {
+                                'SenderUserId': localStorageFactory.getKey("storedUserId"),
+                                'ReceiverUserId': id
+                              };
+            //first send API call to start conversationId
+            MessageFactory.addConversation(conversation).then(
+              function(response){
+                            //with response get conversationId
+                var conId = response.data.conversationId;
+
+                var message = {
+                                'ConversationId': conId,
+                                'Subject': rc.subject,
+                                'Body': rc.body,
+                                'DateCreated': new Date()
+                              };
+
+                MessageFactory.addMessage(message).then(
+                  function(response){
+                    console.log(response);
+                    SweetAlert.swal("Message Sent!", "", "success");
+                  },
+                  function(error){
+                    console.log(error);
+                    console.log("Error sending message")
+                  }
+                )
+              },
+              function(error){
+                console.log(error);
+                console.log("error sending conversation");
+              }
+            )
+
+          }//close send message
     }
 })();

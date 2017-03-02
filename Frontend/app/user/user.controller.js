@@ -5,10 +5,10 @@
         .module('app')
         .controller('UserController', UserController);
 
-    UserController.$inject = ['UserFactory', '$state', '$rootScope', 'localStorageService', 'filepickerService', 'SweetAlert'];
+    UserController.$inject = ['UserFactory', '$state', '$rootScope', 'localStorageFactory', 'filepickerService', 'SweetAlert'];
 
     /* @ngInject */
-    function UserController(UserFactory, $state, $rootScope, localStorageService, filepickerService, SweetAlert) {
+    function UserController(UserFactory, $state, $rootScope, localStorageFactory, filepickerService, SweetAlert) {
         var uc = this;
         uc.getUser = getUser;
         uc.addUser = addUser;
@@ -30,10 +30,9 @@
 
                         $state.go('register');
                     } else {
-                        localStorageService.set('storedUserId', user[0].userId);
+                        localStorageFactory.setKey('storedUserId', user[0].userId);
                         SweetAlert.swal("Welcome Back " + user[0].firstName, "", "success");
-
-                        console.log('user exists original');
+                        $rootScope.logIn();
                         $state.go('search');
                     }
                 },
@@ -53,6 +52,7 @@
 
                 UserFactory.getUser(login).then(
                     function(response) {
+                      var user = response.data;
 
                         //check user email/password to see if exists
                         if (user[0] == null) {
@@ -60,9 +60,8 @@
                             addFacebookUser(uc.userDetails);
                             $state.go('profile');
                         } else {
-                            localStorageService.set('storedUserId', user[0].userId);
+                            localStorageFactory.setKey('storedUserId', user[0].userId);
                             SweetAlert.swal("Welcome Back " + user[0].firstName, "", "success");
-                            console.log("hello");
                             $state.go('search');
                         }
                     },
@@ -92,7 +91,6 @@
             //Pass user object to factory function
             UserFactory.addUser(user).then(
                 function(response) {
-                    console.log(response);
                     SweetAlert.swal("Welcome " + user.firstName, "", "success");
                 },
                 function(error) {
@@ -107,7 +105,6 @@
              containter: 'modal',
              services: ['COMPUTER', 'FACEBOOK']},
              function onSuccess(Blob){
-               console.log(Blob);
                uc.picUrl = Blob.url;
              }
             )
@@ -147,13 +144,12 @@
         //Update User Profile with -->function updateUser(id, user)
         function updateUser(user) {
 
-            var storedUserId = localStorageService.get("storedUserId");
+            var storedUserId = localStorageFactory.getKey("storedUserId");
             //add updated profile pic
             user.profilePic = uc.picUrl;
 
             UserFactory.updateUser(storedUserId, user).then(
                 function(response) {
-                    console.log(response);
                     SweetAlert.swal("Profile Updated", "", "success");
                 },
                 function(error) {
@@ -163,16 +159,14 @@
         }
         //viewUser
         function viewUser() {
-            var storedUserId = localStorageService.get("storedUserId");
+            var storedUserId = localStorageFactory.getKey("storedUserId");
 
             UserFactory.viewUser(storedUserId).then(
                 function(response) {
 
                    uc.user = response.data;
-                   uc.lname = uc.user.lastName;
-                   uc.conversations = uc.user.conversations;
-                   console.log(uc.conversations);
-                   console.log(uc.user);
+                  //  uc.lname = uc.user.lastName;
+                  //  uc.conversations = uc.user.conversations;
 
                 },
 
@@ -181,7 +175,5 @@
                 }
             )
         }//close viewUser
-
-
     } //close UserController
 })();

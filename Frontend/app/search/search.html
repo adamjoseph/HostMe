@@ -1,9 +1,8 @@
-<div ng-include="'app/partials/nav.user.html'"></div>
 <!-- <div ng-include="'app/partials/nav.full.html'"></div> -->
-<div>
-    <input ng-model="sc.City" type="text"></input>
+<div class="form-inline">
+    <input class="form-control" ng-model="sc.City" type="text"></input>
   <!--   Function in SearchController, RoomFactory -->
-    <button ng-click="sc.getRooms()" type="button" class="btn btn-default btn-round">Search</button>
+    <button ng-click="sc.getRooms()" type="button" class="btn btn-color"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
 </div>
 <!-- <div class="row" style="margin-top: 24px;"> -->
 <!--    <div class="col-xs-4" ng-repeat='data in sc.ReturnRoom'> -->
@@ -26,4 +25,3 @@
     <!-- roomDetailDisplay passed in the state in ap.js -->
     <!--   <div><a ui-sref="roomDetail({roomDetailDisplay :  '{{data}}'  })">Look for More Details</a></div> -->
 </div>
-<!-- <div class="well" ui-view></div> -->

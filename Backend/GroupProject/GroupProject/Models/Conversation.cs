@@ -19,11 +19,11 @@ namespace GroupProject.Models
         //Mapping
         [ForeignKey("SenderUserId")]
         [InverseProperty("Conversations")]
-        public virtual User Sender {get; set;}
+        public User Sender {get; set;}
 
         [ForeignKey("ReceiverUserId")]
         //[InverseProperty("ReceiverConversations")]
-        public virtual User Receiver { get; set; }
+        public User Receiver { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
     }
 }

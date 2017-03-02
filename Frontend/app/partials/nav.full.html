@@ -1,4 +1,5 @@
-<div ng-hide="!vm.isLogin" ng-show="vm.isLogin">
+<!-- <pre>,{{$root.userNav}},</pre> -->
+<div >
   <nav class="navbar  nav-style">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -6,15 +7,15 @@
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a ui-sref="search"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-        <li ng-if=""><a ui-sref="profile"><i class="fa fa-user-o" aria-hidden="true"></i> Profile</a></li>
-        <li ng-if=""><a ui-sref="messages"><i class="fa fa-envelope-o" aria-hidden="true"></i> Messages</a></li>
-        <li ng-if=""><a ui-sref="favorites"><i class="fa fa-star" aria-hidden="true"></i> Favorites</a></li>
-
+        <li ng-hide="isHidden"><a ui-sref="profile"><i class="fa fa-user-o" aria-hidden="true"></i> Profile</a></li>
+        <li ng-hide="isHidden"><a ui-sref="messages"><i class="fa fa-envelope-o" aria-hidden="true"></i> Messages</a></li>
+        <!-- <li ><a ui-sref="favorites"><i class="fa fa-star" aria-hidden="true"></i> Favorites</a></li> -->
+        <li>{{$root.UserNav}}</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><img class="profile-img" height="50" width="50" src="{{uc.user.profilePic}}">
-        <li ng-if=""><a ui-sref="signin"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-        <li ng-if=""><a ng-click="logOut()"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+        <!-- <li><img class="profile-img" height="50" width="50" src="{{uc.user.profilePic}}"> -->
+        <li ng-show="isHidden"><a ui-sref="signin"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+        <li ng-hide="isHidden"><a href="" ng-click="logOut()"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
         </li>
       </ul>
     </div>

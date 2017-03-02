@@ -5,20 +5,21 @@
         .module('app')
         .controller('MessageController', MessageController);
 
-    MessageController.$inject = ['MessageFactory', '$state', 'localStorageService' ];
+    MessageController.$inject = ['MessageFactory', '$state', 'localStorageFactory' ];
 
     /* @ngInject */
-    function MessageController(MessageFactory, $state, localStorageService)  {
+    function MessageController(MessageFactory, $state, localStorageFactory)  {
         var mc = this;
         mc.activate = activate;
         mc.replyMessage = replyMessage;
+
 
 
         activate();
 
         function activate(){
 
-          var id = localStorageService.get("storedUserId");
+          var id = localStorageFactory.getKey("storedUserId");
 
           MessageFactory.getMessages(id).then(
             function(response){
@@ -45,11 +46,9 @@
             },
             function(error){
               console.log(error);
-            }
-          )
+            })
 
-        }
-
+        }//close replyMessage
 
     }
 })();

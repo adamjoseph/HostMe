@@ -1,4 +1,3 @@
-<div ng-include="'app/partials/nav.user.html'"></div>
 <!-- fires viewUser function on page load -->
 <div data-ng-init="uc.viewUser()">
     <!-- Profile Container for Viewing Profile Panel-->
@@ -9,7 +8,7 @@
             </div>
             <div class="panel-body" ng-hide="editing">
                 <div class="row">
-                    <div class="col-md-3 col-lg-6" align="center"> <img alt="User Pic" src="{{ uc.user.profilePic }}" class="img-circle img-responsive"> </div>
+                    <div class="col-md-4" align="center"> <img alt="User Pic" src="{{ uc.user.profilePic }}" class="img-circle img-responsive"> </div>
                     <div class=" col-md-9 col-lg-5 ">
                         <table class="table table-user-information">
                             <tbody>
@@ -23,7 +22,7 @@
                                 </tr>
                                 <tr>
                                     <td>Date of Birth</td>
-                                    <td>{{uc.user.birthDate}}</td>
+                                    <td>{{uc.user.birthDate | date}}</td>
                                 </tr>
                                 <tr>
                                     <td>Email</td>
@@ -61,54 +60,54 @@
     <div ng-show="editing" ng-hide="!editing">
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-3 col-lg-6 " align="center"> <img alt="User Pic" src="{{ uc.user.profilePic }}" class="img-circle img-responsive"></div>
-                <div>
+                <div class="col-md-3" align="center"> <img alt="User Pic" src="{{ uc.user.profilePic }}" class="img-circle img-responsive"></div>
+                <div class="">
                   <button class="btn btn-color" ng-click="uc.pickFile()"><i class="fa fa-camera-retro" aria-hidden="true"></i> Profile Pic</button>
                 </div>
-                <div class=" col-md-9 col-lg-5 ">
+                <div class="col-md-6">
                     <table class="table table-user-information">
                         <tbody>
                             <tr>
                                 <td>First Name:</td>
                                 <td>
-                                    <input ng-model="uc.user.firstName"></input>
+                                    <input class="form-control" type="text" ng-model="uc.user.firstName"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Last Name:</td>
                                 <td>
-                                    <input ng-model="uc.user.lastName"></input>
+                                    <input class="form-control" type="text" ng-model="uc.user.lastName"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Date of Birth</td>
                                 <td>
-                                    <input ng-model="uc.user.birthDate"></input>
+                                    <input class="form-control" type="text" ng-model="uc.user.birthDate"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Email</td>
                                 <td>
-                                    <input ng-model="uc.user.email"></input>
+                                    <input class="form-control" type="email" ng-model="uc.user.email"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>User Name</td>
                                 <td>
-                                    <input ng-model="uc.user.userName"></input>
+                                    <input class="form-control" type="text" ng-model="uc.user.userName"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Phone Number</td>
                                 <td>
-                                    <input ng-model="uc.user.contactPhone"></input>
+                                    <input class="form-control" type="text" ng-model="uc.user.contactPhone"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Zip</td>
 
                                 <td>
-                                    <input ng-model="uc.user.zip"></input>
+                                    <input class="form-control" type="text" ng-model="uc.user.zip"></input>
                                 </td>
                             </tr>
                         </tbody>

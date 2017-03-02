@@ -4,8 +4,6 @@
     angular
         .module('app', ['ui.router', 'LocalStorageModule', 'oitozero.ngSweetAlert', 'angular-filepicker', 'socialLogin'])
         .value("baseAPI", "http://localhost:51319/api/")
-        .value("basicNav", 'app/partials/nav.basic.html')
-        .value("userNav", 'app/partials/nav.user.html')
         .config(function(filepickerProvider) {
             filepickerProvider.setKey('AWJJfgMMsQpqiG5ZJI3Kwz')
         })
@@ -15,8 +13,6 @@
         .config(function(socialProvider) {
             socialProvider.setFbKey({ appId: "1288453837908680", apiVersion: "v2.8" })
         })
-
-
     .config(function($stateProvider, $urlRouterProvider) {
             //More any unmatched URL set up default route to main
             $urlRouterProvider.otherwise('/search');
@@ -69,31 +65,37 @@
 
         })
         .run(function($rootScope,
-                localStorageService,
+                localStorageFactory,
                 $state,
                 $location) {
                 // rootScope handler for when user changes states
 
-                $rootScope.$on('$stateChangeStart', function() {
-                //  var userNav = $rootScope.userNav;
+                $rootScope.$on('$stateChangeStart', function() { //event, toState, toParams, fromState, from Params
+                 var userNav = $rootScope.userNav;
                     // check if user id is stored
-                    var isLogin = localStorageService.get("storedUserId");
+                    var isLogin = localStorageFactory.getKey("storedUserId");
                     if (isLogin === null) {
-                      // console.log(isLogin)
-                      // console.log('hit')
+                      userNav = false
+                      console.log(isLogin);
+                      console.log(userNav);
                         // userNav = false;
                         $location.path('/signin');
                     }
                     else {
-                      // userNav = true
-                      // console.log('work!')
-                      // console.log(userNav)
+                      userNav = true
+                      console.log(isLogin);
+                      console.log(userNav);
                     }
                 })
 
                 $rootScope.logOut = function(){
-                  localStorageService.clearAll();
+                  $rootScope.$broadcast("logOut");
+                  localStorageFactory.logOut();
                   $state.go("search");
+                }
+
+                $rootScope.logIn = function(){
+                  $rootScope.$broadcast("logIn");
                 }
 
             }
