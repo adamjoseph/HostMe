@@ -83,8 +83,13 @@
             //first send API call to start conversationId
             MessageFactory.addConversation(conversation).then(
               function(response){
-                            //with response get conversationId
-                var conId = response.data.conversationId;
+                var conId;
+            //with response get conversationId
+                if(response.data.conversationId[0] != null){
+                   conId = response.data.conversationId[0];
+                } else {
+                   conId = response.data.conversationId;
+                }
 
                 var message = {
                                 'ConversationId': conId,

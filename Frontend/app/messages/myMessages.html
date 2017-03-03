@@ -1,25 +1,54 @@
 <div class="container">
   <h2 class="text-center">Your Messages</h2>
   <hr/>
-    <div class="panel panel-info" ng-repeat="c in mc.conversations">
+  <div>
+      <ul class="nav nav-tabs">
+        <li ><a href="" ng-click="sent = false">Received</a></li>
+        <li><a href="" ng-click="sent = true">Sent</a></li>
+      </ul>
+  </div> <!--close tabs div -->
+  <div class="panel panel-info" ng-repeat="c in mc.receivedConvos" ng-show="!sent">
         <div class="panel-body">
             <div class="col-s-3">
-                <img ng-src={{c[0].conversation.sender.profilePic}} height= "150" width = "150" alt="">
+                <img ng-src={{c.senderPic}} height= "150" width = "150" alt="">
             </div>
             <div "col-s-8">
                 <table class="table table-striped" >
-                  <tr ng-repeat="m in mc.conversations[$index]" ng-click="edit = !edit" >
-                      <td>{{ m.conversation.sender.firstName}} {{ m.conversation.sender.lastName}}</td>
+                  <tr ng-repeat="m in c.conversation" ng-click="edit = !edit" >
+                    <div>
+                      <td><a ng-click="show = !show">{{c.sender}}</a></td>
                       <td>{{m.subject}}</td>
+                      <td ng-show="show" ng-hide="!show">{{m.body}}</td>
                       <td>{{m.dateCreated | date}}</td>
                       <td><textarea  cols="10" rows="2" ng-model="mc.body" ng-show="edit" ng-hide="!edit"></textarea></td>
-                      <td><button class="btn btn-color" ng-click="mc.replyMessage(m)">Reply</button>
+                      <td><button class="btn btn-color" ng-click="mc.replyMessage(m, c)">Reply</button>
                       </td>
+                    </div>
                   </tr>
                 </table>
-
-
             </div>
        </div>
-    </div>
+  </div> <!--close receive div -->
+  <div class="panel panel-info" ng-repeat="c in mc.sentConvos" ng-show="sent">
+        <div class="panel-body">
+            <div class="col-s-3">
+                <img ng-src={{c.receiverPic}} height= "150" width = "150" alt="">
+            </div>
+            <div "col-s-8">
+                <table class="table table-striped" >
+                  <tr ng-repeat="m in c.conversation" ng-click="edit = !edit" >
+                    <div>
+                      <td><a ng-click="show = !show">{{c.receiver}}</a></td>
+                      <td>{{m.subject}}</td>
+                      <td ng-show="show" ng-hide="!show">{{m.body}}</td>
+                      <td>{{m.dateCreated | date}}</td>
+                      <!-- <td><textarea  cols="10" rows="2" ng-model="mc.body" ng-show="edit" ng-hide="!edit"></textarea></td>
+                      <td><button class="btn btn-color" ng-click="mc.replyMessage(m, c)">Reply</button> -->
+                      </td>
+                    </div>
+                  </tr>
+                </table>
+            </div>
+       </div>
+  </div> <!--close sent div -->
 </div>

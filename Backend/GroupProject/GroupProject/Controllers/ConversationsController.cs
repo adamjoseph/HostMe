@@ -80,6 +80,18 @@ namespace GroupProject.Controllers
                 return BadRequest(ModelState);
             }
 
+            //var possibleCon = db.Conversations.Select(d => d.SenderUserId == conversation.SenderUserId && d.ReceiverUserId == conversation.ReceiverUserId);
+
+            var possibleCon = from d in db.Conversations
+                              where d.SenderUserId == conversation.SenderUserId
+                              && d.ReceiverUserId == conversation.ReceiverUserId
+                              select d.ConversationId;
+
+            if (possibleCon.Any())
+            {
+                return Ok(new { conversationId = possibleCon } );
+            }
+
             db.Conversations.Add(conversation);
             db.SaveChanges();
 

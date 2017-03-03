@@ -141,6 +141,19 @@ namespace GroupProject.Controllers
                 return NotFound();
             }
 
+            //delete all favorites with the given room id
+
+            var existingFavs = from r in db.Favorites
+                               where r.RoomId == id
+                               select r;
+
+            foreach (Favorite f in existingFavs)
+            {
+                db.Favorites.Remove(f);
+                
+            }
+
+
             db.Rooms.Remove(room);
             db.SaveChanges();
 

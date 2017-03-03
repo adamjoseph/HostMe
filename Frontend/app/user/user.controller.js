@@ -5,10 +5,10 @@
         .module('app')
         .controller('UserController', UserController);
 
-    UserController.$inject = ['UserFactory', '$state', '$rootScope', 'localStorageFactory', 'filepickerService', 'SweetAlert'];
+    UserController.$inject = ['RoomFactory','UserFactory', '$state', '$rootScope', 'localStorageFactory', 'filepickerService', 'SweetAlert'];
 
     /* @ngInject */
-    function UserController(UserFactory, $state, $rootScope, localStorageFactory, filepickerService, SweetAlert) {
+    function UserController(RoomFactory, UserFactory, $state, $rootScope, localStorageFactory, filepickerService, SweetAlert) {
         var uc = this;
         uc.getUser = getUser;
         uc.addUser = addUser;
@@ -16,8 +16,19 @@
         uc.updateUser = updateUser;
         uc.viewUser = viewUser;
         uc.pickFile = pickFile;
+        uc.successLogin = successLogin;
+        uc.updateRoom = updateRoom;
+        uc.deleteRoom = deleteRoom;
 
 
+        //Response if user is successfully authenticated
+        function successLogin(id, name){
+          localStorageFactory.setKey('storedUserId', id);
+          SweetAlert.swal("Welcome Back " + name, "", "success");
+          $rootScope.logIn();
+          $state.go('search');
+
+        }
         //checks user email and password
         function getUser() {
 
@@ -30,10 +41,7 @@
 
                         $state.go('register');
                     } else {
-                        localStorageFactory.setKey('storedUserId', user[0].userId);
-                        SweetAlert.swal("Welcome Back " + user[0].firstName, "", "success");
-                        $rootScope.logIn();
-                        $state.go('search');
+                      successLogin(user[0].userId, user[0].firstName);
                     }
                 },
                 function(error) {
@@ -60,9 +68,11 @@
                             addFacebookUser(uc.userDetails);
                             $state.go('profile');
                         } else {
-                            localStorageFactory.setKey('storedUserId', user[0].userId);
-                            SweetAlert.swal("Welcome Back " + user[0].firstName, "", "success");
-                            $state.go('search');
+                            successLogin(user[0].userId, user[0].firstName);
+                            // localStorageFactory.setKey('storedUserId', user[0].userId);
+                            // SweetAlert.swal("Welcome Back " + user[0].firstName, "", "success");
+                            // $rootScope.logIn();
+                            // $state.go('search');
                         }
                     },
                     function(error) {
@@ -136,7 +146,7 @@
                         console.log(error);
                     }
                 )
-            } else {
+            } else {//if passwords don't match
                   SweetAlert.swal("Passwords do not match", "", "warning");
             } //close if/else
         } //close addUser
@@ -156,20 +166,41 @@
                     console.log(error)
                 }
             )
-        }
+        }//close update user
+
+        function updateRoom(room){
+          room.pictureUrl = uc.picUrl;
+          var id = room.roomId;
+
+          RoomFactory.updateRoom(id, room).then(
+            function(response){
+              SweetAlert.swal("Room Updated", "", "success");
+            },
+            function(error) {
+              console.log(error);
+            }
+          )
+          }//close update room
+
+          function deleteRoom(id){
+            RoomFactory.deleteRoom(id).then(
+              function(response){
+                SweetAlert.swal("Room Deleted", "", "success");
+              },
+              function(error){
+                console.log(error);
+              }
+            )
+          }//close deleteRoom
+
         //viewUser
         function viewUser() {
             var storedUserId = localStorageFactory.getKey("storedUserId");
 
             UserFactory.viewUser(storedUserId).then(
                 function(response) {
-
                    uc.user = response.data;
-                  //  uc.lname = uc.user.lastName;
-                  //  uc.conversations = uc.user.conversations;
-
                 },
-
                 function(error) {
                     console.log(error)
                 }

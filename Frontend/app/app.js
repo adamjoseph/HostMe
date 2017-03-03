@@ -49,7 +49,7 @@
                     controllerAs: "mc"
                 })
 
-            .state('roomDetail', {
+                .state('roomDetail', {
                     url: "/roomDetail/:roomDetailDisplay",
                     templateUrl: "app/room/room.detail.html",
                     controller: "RoomController",
@@ -62,6 +62,13 @@
                     controllerAs: "rc"
                 })
 
+                .state('favorites', {
+                    url: "/favorites",
+                    templateUrl: "app/user/room.favorites.html",
+                    controller: "SearchController",
+                    controllerAs: "sc"
+                })
+
 
         })
         .run(function($rootScope,
@@ -71,20 +78,20 @@
                 // rootScope handler for when user changes states
 
                 $rootScope.$on('$stateChangeStart', function() { //event, toState, toParams, fromState, from Params
-                 var userNav = $rootScope.userNav;
+                //  var userNav = $rootScope.userNav;
                     // check if user id is stored
                     var isLogin = localStorageFactory.getKey("storedUserId");
                     if (isLogin === null) {
-                      userNav = false
-                      console.log(isLogin);
-                      console.log(userNav);
+                      // userNav = false
+                      // console.log(isLogin);
+                      // console.log(userNav);
                         // userNav = false;
                         $location.path('/signin');
                     }
                     else {
-                      userNav = true
-                      console.log(isLogin);
-                      console.log(userNav);
+                      // userNav = true
+                      // console.log(isLogin);
+                      // console.log(userNav);
                     }
                 })
 

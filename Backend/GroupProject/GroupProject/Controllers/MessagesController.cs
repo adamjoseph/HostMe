@@ -31,10 +31,17 @@ namespace GroupProject.Controllers
                               || d.SenderUserId == id
                               select new
                               {
-                                  message = d.Messages
-
+                                  conversation = d.Messages,
+                                  conversationId = d.ConversationId, 
+                                  sender = d.Sender.FirstName + " " + d.Sender.LastName,
+                                  senderId = d.SenderUserId,
+                                  senderPic  = d.Sender.ProfilePic,
+                                  receiver = d.Receiver.FirstName + " " + d.Receiver.LastName,
+                                  receiverId = d.ReceiverUserId,
+                                  receiverPic = d.Receiver.ProfilePic
                               };
-                                                //select d.Messages;
+                              //select d.Messages;
+                                                
 
 
             //allMessages = allMessages.Contains(m => m.ConversationId == convIds);
