@@ -1,35 +1,45 @@
-<div ng-include="'app/partials/nav.user.html'"></div>
 
+<div class="container">
+<div class="form-inline">
+    <input class="form-control" ng-model="sc.City" type="text" placeholder="City"></input>
 
-
-
-
-
-
-
-
-
-<div> <input ng-model="sc.City" type="text"></input>
   <!--   Function in SearchController, RoomFactory -->
-    <button ng-click="sc.getRooms()" type="button" class="btn btn-default btn-round">Search</button>
+    <button ng-click="sc.getRooms(); advanced = false" type="button" class="btn btn-color"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
 </div>
-<!-- <div class="row" style="margin-top: 24px;"> -->
-<!--    <div class="col-xs-4" ng-repeat='data in sc.ReturnRoom'> -->
-<div ng-repeat='room in sc.ReturnRoom'>
 
-    <div class="row">
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail">
-                <img ng-src="{{room.pictureUrl}}">
-                <div class="caption">
-                    <h4>{{ room.roomName }} </h4>
-                    <p>${{ room.price }}</p>
-                  
-                    <p> <a class="btn btn-default" role="button" ng-click="sc.storeRoomId(room.roomId)">More Details</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-   
+
+<a href="#" ng-click="advanced = !advanced">Advanced Search</a>
+<div class="form-inline" ng-show="advanced">
+  <input class="form-control" type="text" placeholder="Zip Code" ng-model="sc.Zip">
+  <input class="form-control" type="number" placeholder="Max Price" ng-model="sc.MaxPrice">
+  <input class="form-control" type="number" placeholder="Guest Limit" ng-model="sc.GuestLimit">
+  <input class="form-control" type="text" placeholder="Keyword(s)" ng-model="sc.Keyword">
+  <div class="form-check">
+    <label class="form-check-label">Private
+    <input class="form-check-input" type="checkbox" placeholder="Private" ng-model="sc.Private"></label>
+  </div>
 </div>
+</div>
+
+
+
+
+
+<div class="container divider">
+  <div class="row">
+  <div ng-repeat='room in sc.ReturnRoom'>
+          <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                  <img ng-src="{{room.pictureUrl}}">
+                  <div class="caption">
+                      <h4>{{ room.roomName }} </h4>
+                      <p>${{ room.price }} /night </p>
+                      <!-- roomDetailDisplay passed in the state in ap.js -->
+                       <a class="btn btn-color" role="button" ng-click="sc.storeRoomId(room.roomId)">More Details</a>
+                       <a class="btn btn-color" role="button" ng-click="sc.addFavorite(room.roomId)">Add to Favorites</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+</div>
+

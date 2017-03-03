@@ -159,6 +159,14 @@
     <Compile Include="Migrations\201702241819027_Fifth-Migration.Designer.cs">
       <DependentUpon>201702241819027_Fifth-Migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703020059098_Sketch-Migration.cs" />
+    <Compile Include="Migrations\201703020059098_Sketch-Migration.Designer.cs">
+      <DependentUpon>201703020059098_Sketch-Migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703030150172_Cascade-Migration.cs" />
+    <Compile Include="Migrations\201703030150172_Cascade-Migration.Designer.cs">
+      <DependentUpon>201703030150172_Cascade-Migration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Conversation.cs" />
     <Compile Include="Models\Favorite.cs" />
@@ -199,6 +207,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702241819027_Fifth-Migration.resx">
       <DependentUpon>201702241819027_Fifth-Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703020059098_Sketch-Migration.resx">
+      <DependentUpon>201703020059098_Sketch-Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703030150172_Cascade-Migration.resx">
+      <DependentUpon>201703030150172_Cascade-Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

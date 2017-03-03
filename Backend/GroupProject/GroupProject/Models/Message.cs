@@ -15,6 +15,6 @@ namespace GroupProject.Models
         public DateTime DateCreated { get; set; }
 
         //
-        public virtual Conversation Conversation { get; set; }
+        public Conversation Conversation { get; set; }
     }
 }

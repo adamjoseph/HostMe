@@ -1,21 +1,22 @@
-<div ng-include="'app/partials/nav.user.html'"></div>
 <!-- fires viewUser function on page load -->
 <div data-ng-init="uc.viewUser()">
     <!-- Profile Container for Viewing Profile Panel-->
-    <div class="container">
+    <div class="container-fluid">
+      <div class="col-md-5 col-md-offset-1">
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3>{{uc.user.firstName}} {{uc.user.lastName}}</h3>
             </div>
             <div class="panel-body" ng-hide="editing">
                 <div class="row">
-                    <div class="col-md-3 col-lg-6" align="center"> <img alt="User Pic" src="{{ uc.user.profilePic }}" class="img-circle img-responsive"> </div>
+                    <div class="col-md-4" align="center"> <img alt="User Pic" src="{{ uc.user.profilePic }}" class="img-circle img-responsive"> </div>
                     <div class=" col-md-9 col-lg-5 ">
                         <table class="table table-user-information">
                             <tbody>
                                 <tr>
                                     <td>First Name:</td>
                                     <td>{{uc.user.firstName}}</td>
+                                      <td><input ng-show="editing" class="form-control" type="text" ng-model="uc.user.firstName"></input></td>
                                 </tr>
                                 <tr>
                                     <td>Last Name:</td>
@@ -23,7 +24,7 @@
                                 </tr>
                                 <tr>
                                     <td>Date of Birth</td>
-                                    <td>{{uc.user.birthDate}}</td>
+                                    <td>{{uc.user.birthDate | date}}</td>
                                 </tr>
                                 <tr>
                                     <td>Email</td>
@@ -56,59 +57,88 @@
             </div>
         </div>
     </div>
+    <div class="col-md-5" style="display: float-right;">
+      <div class="thumbnail img-fluid" ng-repeat="r in uc.user.rooms">
+          <img ng-src="{{r.pictureUrl}}">
+          <div class="caption">
+              <h4>{{ r.roomName }} </h4>
+              <div ng-show="update">
+              <input class="form-control" ng-model="r.price"/>
+              <input class="form-control" ng-model="r.address"/>
+              <input class="form-control" ng-model="r.state"/>
+              <input class="form-control" ng-model="r.zip"/>
+              <input class="form-control" type="number" ng-model="r.roomNumber"/>
+              <input class="form-control" type="number" ng-model="r.guestLimit"/>
+              <div class="form-check">
+                <label class="form-check-label"> Private
+                  <input class="form-check-input" type="checkbox" ng-model="r.private">
+                </label>
+              </div>
+              <textarea class="form-control" rows="10" ng-model="r.description"> </textarea>
+              <div class="">
+                <button class="btn btn-color" ng-click="uc.pickFile()"><i class="fa fa-camera-retro" aria-hidden="true"></i> Room Pic</button>
+              </div>
+            </div>
+
+              <a href="" ng-click="update = !update"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> </a>
+              <a href="" ng-click="update = !update; uc.updateRoom(r)"><i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i> </a>
+              <a href="" ng-click="uc.deleteRoom(r.roomId)"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i> </a>
+
+          </div>
+      </div>
 </div>
 <div class="container">
     <div ng-show="editing" ng-hide="!editing">
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-3 col-lg-6 " align="center"> <img alt="User Pic" src="{{ uc.user.profilePic }}" class="img-circle img-responsive"></div>
-                <div>
+                <div class="col-md-3"> <img alt="User Pic" src="{{ uc.user.profilePic }}" class="img-circle img-responsive"></div>
+                <div class="">
                   <button class="btn btn-color" ng-click="uc.pickFile()"><i class="fa fa-camera-retro" aria-hidden="true"></i> Profile Pic</button>
                 </div>
-                <div class=" col-md-9 col-lg-5 ">
+                <div class="col-md-6">
                     <table class="table table-user-information">
                         <tbody>
                             <tr>
-                                <td>First Name:</td>
+                                <!-- <td>First Name:</td>
                                 <td>
-                                    <input ng-model="uc.user.firstName"></input>
-                                </td>
+                                    <input class="form-control" type="text" ng-model="uc.user.firstName"></input>
+                                </td> -->
                             </tr>
                             <tr>
                                 <td>Last Name:</td>
                                 <td>
-                                    <input ng-model="uc.user.lastName"></input>
+                                    <input class="form-control" type="text" ng-model="uc.user.lastName"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Date of Birth</td>
                                 <td>
-                                    <input ng-model="uc.user.birthDate"></input>
+                                    <input class="form-control" type="text" ng-model="uc.user.birthDate"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Email</td>
                                 <td>
-                                    <input ng-model="uc.user.email"></input>
+                                    <input class="form-control" type="email" ng-model="uc.user.email"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>User Name</td>
                                 <td>
-                                    <input ng-model="uc.user.userName"></input>
+                                    <input class="form-control" type="text" ng-model="uc.user.userName"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Phone Number</td>
                                 <td>
-                                    <input ng-model="uc.user.contactPhone"></input>
+                                    <input class="form-control" type="text" ng-model="uc.user.contactPhone"></input>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Zip</td>
 
                                 <td>
-                                    <input ng-model="uc.user.zip"></input>
+                                    <input class="form-control" type="text" ng-model="uc.user.zip"></input>
                                 </td>
                             </tr>
                         </tbody>
@@ -121,5 +151,12 @@
                 <button class=" btn btn-color" ng-click="uc.updateUser(uc.user)">Save Changes</button>
             </div>
         </div>
+      </div>  <!--closes left dive w/profile -->
+
+
+
+
+
+      </div> <!--close room panel -->
     </div>
 </div>

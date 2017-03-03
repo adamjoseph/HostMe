@@ -5,14 +5,15 @@
         .module('app')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['RoomFactory', '$state', '$stateParams', '$rootScope', 'localStorageService'];
+    SearchController.$inject = ['RoomFactory', '$state', '$stateParams', 'localStorageFactory'];
 
     /* @ngInject */
-    function SearchController(RoomFactory, $state, $stateParams, $rootScope, localStorageService) {
+    function SearchController(RoomFactory, $state, $stateParams, localStorageFactory) {
         var sc = this;
         sc.title = 'SearchController'
         sc.storeRoomId = storeRoomId;
         sc.getRooms = getRooms;
+        sc.addFavorite = addFavorite;
 
         function getRooms() {
 
@@ -39,9 +40,31 @@
 
         function storeRoomId(id){
 
-          localStorageService.set("roomId", id);
+          localStorageFactory.setKey("roomId", id);
           $state.go("roomDetail");
-        }
+        }//close store room id
+
+        function addFavorite(roomId) {
+          if(localStorageFactory.getKey("storedUserId") == null){
+            SweetAlert.swal("Please Sign-In");
+            $state.go("signin");
+
+          } else {
+
+            var favorite = {"UserId" : localStorageFactory.getKey("storedUserId"),
+                            "RoomId" : roomId};
+
+            RoomFactory.addFavorite(favorite).then(
+              function(response) {
+                console.log(response);
+              },
+              function(error) {
+                console.log(error);
+              }
+            )
+          }
+        }//closes addFavorites
+
 
 
 

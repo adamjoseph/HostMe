@@ -24,7 +24,7 @@ namespace GroupProject.Models
 
         public int GuestLimit { get; set; }
      
-        public virtual User User { get; set; }
+        public User User { get; set; }
         //public virtual ICollection<Favorite> Favorites { get; set; }
     }
 }

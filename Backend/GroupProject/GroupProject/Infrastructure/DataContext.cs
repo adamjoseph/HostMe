@@ -40,12 +40,6 @@ namespace GroupProject.Infrastructure
                 .WithRequired(f => f.User)
                 .HasForeignKey(f => f.UserId);
 
-            ////A Room has many Favorites
-            //modelBuilder.Entity<Room>()
-            //    .HasMany(r => r.Favorites)
-            //    .WithRequired(f => f.Room)
-            //    .HasForeignKey(f => f.RoomId);
-
 
             //One to Many User to Rooms
             modelBuilder.Entity<User>()
@@ -53,18 +47,6 @@ namespace GroupProject.Infrastructure
                 .WithRequired(r => r.User)
                 .HasForeignKey(r => r.UserId);
 
-
-            ////One to Many User to Conversation(SendId)
-            //modelBuilder.Entity<User>()
-            //    .HasMany(c => c.Conversations)
-            //    .WithRequired(u => u.Sender)
-            //    .HasForeignKey(u => u.Sender_UserId);
-
-            //One to Many User to Converstaion(ReceiveId)
-            //modelBuilder.Entity<User>()
-            //   .HasMany(c => c.Conversations)
-            //   .WithRequired(u => u.Receiver)
-            //   .HasForeignKey(u => u.Receiver_UserId);
 
             modelBuilder.Entity<Conversation>()
                 .HasRequired(c => c.Sender)
@@ -76,15 +58,6 @@ namespace GroupProject.Infrastructure
                .WithMany()
                .HasForeignKey(s => s.ReceiverUserId);
 
-            //modelBuilder.Entity<Conversation>()
-            //   .HasRequired(m => m.Sender)
-            //   .WithMany(m => m.Conversations)
-            //   .HasForeignKey(m => m.Sender_UserId);
-
-            //modelBuilder.Entity<Conversation>()
-            //    .HasRequired(m => m.Receiver)
-            //    .WithMany()
-            //    .HasForeignKey(m => m.Receiver_UserId);
 
             //One to Many Conversation to Messages
             modelBuilder.Entity<Conversation>()

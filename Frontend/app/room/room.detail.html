@@ -24,4 +24,19 @@
     </table>
     <h4> Property &#38 Host Description</h4>
     <p>{{rc.room.description}}</p>
+    <div class="form-group">
+    <button type="button" class="btn btn-color" ng-click="editing = !editing">Message Owner</button>
+    </div>
+    <div ng-show="editing" ng-hide="!editing">
+      <div class="from-group">
+      <label>Subject:</label>
+      <input class="form-control" type="text" ng-model="rc.subject">
+      </div>
+      <label> Your Message to {{rc.room.user.firstName}}</label>
+
+    <textarea class="form-control" rows="5" ng-model="rc.body"></textarea>
+
+    <button type="button" class="btn btn-color" ng-click="rc.sendMessage(rc.room.userId)"><i class="fa fa-envelope-o" aria-hidden="true"></i> Send</button>
+
+    </div>
 </div>

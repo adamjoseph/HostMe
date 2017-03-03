@@ -20,15 +20,29 @@ namespace GroupProject.Controllers
         //Get User's messages
         [Route("api/UserMessages")]
         [HttpGet]
-        public IQueryable<ICollection<Message>> GetUserMessages(int id)
+        public IHttpActionResult GetUserMessages(int id)
         {
             //IQueryable<Message> allMessages = db.Messages;
 
             //var convId = db.Conversations.Select(c => c.ConversationId).Where(c => c.ReceiverUserId == id);
 
             var allMessages = from d in db.Conversations
-                                                where d.ReceiverUserId == id
-                                                select d.Messages;
+                              where d.ReceiverUserId == id
+                              || d.SenderUserId == id
+                              select new
+                              {
+                                  conversation = d.Messages,
+                                  conversationId = d.ConversationId, 
+                                  sender = d.Sender.FirstName + " " + d.Sender.LastName,
+                                  senderId = d.SenderUserId,
+                                  senderPic  = d.Sender.ProfilePic,
+                                  receiver = d.Receiver.FirstName + " " + d.Receiver.LastName,
+                                  receiverId = d.ReceiverUserId,
+                                  receiverPic = d.Receiver.ProfilePic
+                              };
+                              //select d.Messages;
+                                                
+
 
             //allMessages = allMessages.Contains(m => m.ConversationId == convIds);
 
@@ -37,7 +51,7 @@ namespace GroupProject.Controllers
             //              .Contains( d.ReceiverUserId == id)
             //              select m;
 
-            return allMessages;
+            return Ok(allMessages);
         }
 
         // GET: api/Messages
