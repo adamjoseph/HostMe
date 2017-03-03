@@ -1,14 +1,22 @@
 <div ng-include="'app/partials/nav.user.html'"></div>
-<!-- <div ng-include="'app/partials/nav.full.html'"></div> -->
-<div>
-    <input ng-model="sc.City" type="text"></input>
+
+
+
+
+
+
+
+
+
+
+<div> <input ng-model="sc.City" type="text"></input>
   <!--   Function in SearchController, RoomFactory -->
     <button ng-click="sc.getRooms()" type="button" class="btn btn-default btn-round">Search</button>
 </div>
 <!-- <div class="row" style="margin-top: 24px;"> -->
 <!--    <div class="col-xs-4" ng-repeat='data in sc.ReturnRoom'> -->
 <div ng-repeat='room in sc.ReturnRoom'>
-    <!-- <p> <img ng-src="{{data.pictureUrl}}" height="62" width="100"> </p> -->
+
     <div class="row">
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
@@ -16,14 +24,12 @@
                 <div class="caption">
                     <h4>{{ room.roomName }} </h4>
                     <p>${{ room.price }}</p>
-                    <!-- roomDetailDisplay passed in the state in ap.js -->
+                  
                     <p> <a class="btn btn-default" role="button" ng-click="sc.storeRoomId(room.roomId)">More Details</a>
                     </p>
                 </div>
             </div>
         </div>
     </div>
-    <!-- roomDetailDisplay passed in the state in ap.js -->
-    <!--   <div><a ui-sref="roomDetail({roomDetailDisplay :  '{{data}}'  })">Look for More Details</a></div> -->
+   
 </div>
-<!-- <div class="well" ui-view></div> -->
