@@ -9,10 +9,10 @@
   </div> <!--close tabs div -->
   <div class="panel panel-info" ng-repeat="c in mc.receivedConvos" ng-show="!sent">
         <div class="panel-body">
-            <div class="col-s-3">
-                <img ng-src={{c.senderPic}} height= "150" width = "150" alt="">
-            </div>
-            <div "col-s-8">
+            <div style="display: inline-block;">
+                <img class="img-rounded" ng-src={{c.senderPic}} height= "150" width = "150" alt="">
+            </div><!-- close img div -->
+            <div class="table-responsive">
                 <table class="table table-striped" >
                   <tr ng-repeat="m in c.conversation" ng-click="edit = !edit" >
                     <div>
