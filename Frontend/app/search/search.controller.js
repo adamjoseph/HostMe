@@ -14,6 +14,7 @@
         sc.storeRoomId = storeRoomId;
         sc.getRooms = getRooms;
         sc.addFavorite = addFavorite;
+        sc.getFavorites = getFavorites;
 
         function getRooms() {
 
@@ -65,12 +66,19 @@
           }
         }//closes addFavorites
 
+        function getFavorites(){
 
+          var id = localStorageFactory.getKey("storedUserId");
 
-
-
-
-
+          RoomFactory.getFavorites(id).then(
+            function(response){
+              sc.userFavs = response.data;
+            },
+            function(error){
+              console.log(error);
+            }
+          )
+        }//close getFavorites
 
 
     }

@@ -20,3 +20,7 @@
 .profile-img {
   border-radius: 25px;
 }
+
+.message-table {
+  display: inline-block;
+}

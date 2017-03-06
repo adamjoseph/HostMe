@@ -139,8 +139,10 @@
 
                 UserFactory.addUser(user).then(
                     function(response) {
-                        SweetAlert.swal("Welcome " + user.firstName, "", "success");
-                        $('input').val('');
+                        console.log(response)
+                        SweetAlert.swal("Welcome " + uc.fname, "", "success");
+                        // $('input').val('');
+                        $state.go('signin');
                     },
                     function(error) {
                         console.log(error);

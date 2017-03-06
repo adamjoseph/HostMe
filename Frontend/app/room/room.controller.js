@@ -38,9 +38,9 @@
 
                 RoomFactory.addRoom(room).then(
                     function(response) {
-                      console.log(response);
                         SweetAlert.swal("Room Added!", "", "success");
                         $('input').val('');
+                        $state.go('profile');
                     },
                     function(error) {
                         console.log(error);
@@ -53,7 +53,6 @@
              containter: 'modal',
              services: ['COMPUTER', 'FACEBOOK']},
              function onSuccess(Blob){
-               console.log(Blob);
                rc.picUrl = Blob.url;
              }
             )
@@ -100,7 +99,6 @@
 
                 MessageFactory.addMessage(message).then(
                   function(response){
-                    console.log(response);
                     SweetAlert.swal("Message Sent!", "", "success");
                   },
                   function(error){

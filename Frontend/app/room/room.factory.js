@@ -15,7 +15,8 @@
           addRoom: addRoom,
           deleteRoom: deleteRoom,
           addFavorite: addFavorite,
-          getRoomById: getRoomById
+          getRoomById: getRoomById,
+          getFavorites: getFavorites
 
         };
 
@@ -51,6 +52,10 @@
 
           function addFavorite(favorite){
             return $http.post(baseAPI + 'Favorites', favorite);
+          }
+
+          function getFavorites(id){
+            return $http.get(baseAPI + 'Favorites/User?id=' + id);
           }
 
           function getRoomById(id){
