@@ -1,9 +1,32 @@
-<div class="container">
+
+<div class="sliderBox">
+
+<!-- <base href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/"> -->
+<div id="slider">
+<figure>
+<img src="http://i.imgur.com/ikMiW4M.jpg" alt>
+<img src="http://i.imgur.com/ZNWOIj2.jpg" alt>
+<img src="http://i.imgur.com/f4Wu3Vx.jpg" alt>
+<img src="http://i.imgur.com/Faw1HkO.png" alt>
+<img src="http://i.imgur.com/gS6teBU.jpg" alt>
+</figure>
+</div>
+</div>
+
+<div class="containerRight ">
+<img ng-src="http://i.imgur.com/ftfillW.jpg">
+</div>
+
+<h4 class="GetawayTitle"> Search for Your Getaway and Personal Guide...</h4>
+<div class="backImg" ng-style="sc.SearchImage"></div>
+<!-- <div class="container"></div> -->
+
 <div class="form-inline">
     <input class="form-control" ng-model="sc.City" type="text" placeholder="City"></input>
+
   <!--   Function in SearchController, RoomFactory -->
-    <button ng-click="sc.getRooms(); advanced = false" type="button" class="btn btn-color"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
-</div>
+    <button ng-click="sc.getRooms(); advanced = false; $ctrl.scrollTo('target')" type="button" class="btn btn-color"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+
 <a href="#" ng-click="advanced = !advanced">Advanced Search</a>
 <div class="form-inline" ng-show="advanced">
   <input class="form-control" type="text" placeholder="Zip Code" ng-model="sc.Zip">
@@ -14,27 +37,18 @@
     <label class="form-check-label">Private
     <input class="form-check-input" type="checkbox" placeholder="Private" ng-model="sc.Private"></label>
   </div>
-</div>
-</div>
+</div></div>
 
-<!-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner" role="listbox">
-    <div class="carousel-item active">
-      <img class="d-block img-fluid" src="app/styles/img/travelGuide.jpg">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block img-fluid" src="app/styles/img/travelGuide2.jpg">
-    </div>
-  </div>
-</div> -->
+<!-- </div> -->
 
 
 
 <div class="container divider">
   <div class="row">
-  <div ng-repeat='room in sc.ReturnRoom'>
+  <div id="target" ng-repeat='room in sc.ReturnRoom'>
           <div class="col-sm-6 col-md-4">
-              <div class="thumbnail">
+           <!-- <div class="col-sm-6 col-md-4"> -->
+              <div class="thumbnail" href="#">
                   <img ng-src="{{room.pictureUrl}}">
                   <div class="caption">
                       <h4>{{ room.roomName }} </h4>
@@ -46,4 +60,5 @@
               </div>
           </div>
       </div>
-</div>
+</div> </div>
+
