@@ -17,6 +17,23 @@ namespace GroupProject.Controllers
     {
         private DataContext db = new DataContext();
 
+        //Get Favorites by Users ID
+        [Route("api/Favorites/User")]
+        [HttpGet]
+        public IHttpActionResult GetFavByUserId(int id)
+        {
+            var rooms = from f in db.Favorites
+                       where f.UserId == id
+                       select new
+                       {
+                           room = f.Room
+                       };
+
+
+            return Ok(rooms);
+        }
+
+
         // GET: api/Favorites
         public IQueryable<Favorite> GetFavorites()
         {

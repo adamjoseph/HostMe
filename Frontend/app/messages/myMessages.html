@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 class="text-center">Your Messages</h2>
+  <h2 class="text-center GetawayTitle">Your Messages</h2>
   <hr/>
   <div>
       <ul class="nav nav-tabs">
@@ -48,7 +48,7 @@
                     <th>Body</th>
                     <th>Date</th>
                   </thead>
-                  <tr ng-repeat="m in c.conversation | orderBy : dateCreated">
+                  <tr ng-repeat="m in c.conversation | orderBy: '-dateCreated'">
                     <div>
                       <td>{{m.subject}}</td>
                       <td >{{m.body}}</td>

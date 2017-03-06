@@ -5,10 +5,10 @@
         .module('app')
         .controller('MessageController', MessageController);
 
-    MessageController.$inject = ['MessageFactory', '$state', 'localStorageFactory' ];
+    MessageController.$inject = ['MessageFactory', '$state', 'localStorageFactory', 'SweetAlert' ];
 
     /* @ngInject */
-    function MessageController(MessageFactory, $state, localStorageFactory)  {
+    function MessageController(MessageFactory, $state, localStorageFactory, SweetAlert)  {
         var mc = this;
         mc.activate = activate;
         mc.replyMessage = replyMessage;
@@ -67,7 +67,8 @@
 
               MessageFactory.addMessage(message).then(
                 function(response){
-                  console.log(response);
+                  SweetAlert.swal("Message Sent");
+                  $('input').val('');
                 },
                 function(error){
                   console.log(error);

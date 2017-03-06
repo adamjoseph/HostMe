@@ -1,11 +1,11 @@
-<body id="image"> 
+<body id="image">
 
 <div class="container">
-    <table id="searchResults" class="table table-bordered ">
+    <table id="searchResults" class="table">
 
 <!--     RoomController  -->
-        <h3> {{ rc.room.roomName }} </h3>
-        <img ng-src="{{rc.room.pictureUrl}}">
+        <h3 class="GetawayTitle"> {{ rc.room.roomName }} </h3>
+        <img class="shadow" ng-src="{{rc.room.pictureUrl}}">
         <tr>
 
             <th>Price:</th>
@@ -34,7 +34,7 @@
       <label>Subject:</label>
       <input class="form-control" type="text" ng-model="rc.subject">
       </div>
-      <label> Your Message to {{rc.room.user.firstName}}</label>
+      <label> Your Message</label>
 
     <textarea class="form-control" rows="5" ng-model="rc.body"></textarea>
 
@@ -43,4 +43,3 @@
     </div>
 </div>
 </div></div></body>
-

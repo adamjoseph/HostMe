@@ -19,6 +19,7 @@
         uc.successLogin = successLogin;
         uc.updateRoom = updateRoom;
         uc.deleteRoom = deleteRoom;
+        uc.updateUserPhoto = updateUserPhoto;
 
 
         //Response if user is successfully authenticated
@@ -120,6 +121,22 @@
             )
           }//close pickFile
 
+          function updateUserPhoto(user) {
+            var storedUserId = localStorageFactory.getKey("storedUserId");
+
+           user.profilePic = uc.picUrl;
+
+           UserFactory.updateUser(storedUserId, user).then(
+                function(response) {
+                    console.log(response);
+                    SweetAlert.swal("Photo Updated", "", "success");
+                },
+                function(error) {
+                    console.log(error)
+                }
+            )
+        }//close updateUserPhoto
+
 
         //Create new user
         function addUser() {
@@ -158,7 +175,7 @@
 
             var storedUserId = localStorageFactory.getKey("storedUserId");
             //add updated profile pic
-            user.profilePic = uc.picUrl;
+            // user.profilePic = uc.picUrl;
 
             UserFactory.updateUser(storedUserId, user).then(
                 function(response) {

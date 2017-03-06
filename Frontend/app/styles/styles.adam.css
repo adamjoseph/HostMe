@@ -17,10 +17,15 @@
   color: #fff;
 }
 
-.profile-img {
-  border-radius: 25px;
-}
 
 .message-table {
   display: inline-block;
+}
+
+.search-pic {
+  max-width: 345px;
+  min-width: 345px;
+  min-height: 230px;
+  max-height: 230px;
+
 }

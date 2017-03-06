@@ -5,10 +5,10 @@
         .module('app')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['RoomFactory', '$state', '$stateParams', 'localStorageFactory'];
+    SearchController.$inject = ['RoomFactory', '$state', '$stateParams', 'localStorageFactory', 'SweetAlert'];
 
     /* @ngInject */
-    function SearchController(RoomFactory, $state, $stateParams, localStorageFactory) {
+    function SearchController(RoomFactory, $state, $stateParams, localStorageFactory, SweetAlert) {
         var sc = this;
         sc.title = 'SearchController'
         sc.storeRoomId = storeRoomId;
@@ -60,7 +60,7 @@
 
                 RoomFactory.addFavorite(favorite).then(
                     function(response) {
-                        console.log(response);
+                        SweetAlert.swal("Favorite Added");
                     },
                     function(error) {
                         console.log(error);

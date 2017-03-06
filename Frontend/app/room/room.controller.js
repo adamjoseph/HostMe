@@ -99,7 +99,7 @@
 
                 MessageFactory.addMessage(message).then(
                   function(response){
-                    SweetAlert.swal("Message Sent!", "", "success");
+                    SweetAlert.swal("Message Sent");
                   },
                   function(error){
                     console.log(error);
