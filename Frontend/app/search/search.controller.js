@@ -15,6 +15,7 @@
         sc.getRooms = getRooms;
         sc.addFavorite = addFavorite;
 
+
         function getRooms() {
 
             var roomObject = {
@@ -38,32 +39,50 @@
             )
         } //close getRooms
 
-        function storeRoomId(id){
+        function storeRoomId(id) {
 
-          localStorageFactory.setKey("roomId", id);
-          $state.go("roomDetail");
-        }//close store room id
+            localStorageFactory.setKey("roomId", id);
+            $state.go("roomDetail");
+        } //close store room id
 
         function addFavorite(roomId) {
-          if(localStorageFactory.getKey("storedUserId") == null){
-            SweetAlert.swal("Please Sign-In");
-            $state.go("signin");
+            if (localStorageFactory.getKey("storedUserId") == null) {
+                SweetAlert.swal("Please Sign-In");
+                $state.go("signin");
 
-          } else {
+            } else {
 
-            var favorite = {"UserId" : localStorageFactory.getKey("storedUserId"),
-                            "RoomId" : roomId};
+                var favorite = {
+                    "UserId": localStorageFactory.getKey("storedUserId"),
+                    "RoomId": roomId
+                };
 
-            RoomFactory.addFavorite(favorite).then(
-              function(response) {
-                console.log(response);
-              },
-              function(error) {
-                console.log(error);
-              }
-            )
-          }
-        }//closes addFavorites
+                RoomFactory.addFavorite(favorite).then(
+                    function(response) {
+                        console.log(response);
+                    },
+                    function(error) {
+                        console.log(error);
+                    }
+                )
+            }
+        } //closes addFavorites
+
+
+        //Trying to scroll to search results
+
+        // sc.scrollTo = function(id) {
+        //     $document
+        //         .scrollToElement(
+        //             angular.element(document.getElementById(id)), 0, 1000);
+
+        // }
+
+
+
+
+
+
 
 
 
