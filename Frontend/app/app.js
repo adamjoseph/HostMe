@@ -5,13 +5,13 @@
         .module('app', ['ui.router', 'LocalStorageModule', 'oitozero.ngSweetAlert', 'angular-filepicker', 'socialLogin'])
         .value("baseAPI", "http://localhost:51319/api/")
         .config(function(filepickerProvider) {
-            filepickerProvider.setKey('AWJJfgMMsQpqiG5ZJI3Kwz')
+            filepickerProvider.setKey('<API_KEY>')
         })
         .config(function(localStorageServiceProvider) {
             localStorageServiceProvider
         })
         .config(function(socialProvider) {
-            socialProvider.setFbKey({ appId: "1288453837908680", apiVersion: "v2.8" })
+            socialProvider.setFbKey({ appId: "<FB_APP_ID>", apiVersion: "v2.8" })
         })
     .config(function($stateProvider, $urlRouterProvider) {
             //More any unmatched URL set up default route to main
