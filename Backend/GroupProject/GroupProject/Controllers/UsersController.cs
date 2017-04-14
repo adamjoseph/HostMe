@@ -28,15 +28,6 @@ namespace GroupProject.Controllers
 
             var user = db.Users.Where(u => u.Password == login.Password && u.Email == login.Email);
 
-            //var person = from u in db.Users
-            //             where u.Email == login.Email
-            //             && u.Password == login.Password
-            //             select u;
-            //if (user == null)
-            //{
-            //    return NotFound();
-            //}
-
             return Ok(user);
         }
 
