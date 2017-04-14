@@ -25,13 +25,6 @@ Angular Filepicker
 Font Awesome
 ```
 
-## App Requirements
-- Create a Facebook social login page to get the user's name and email from  Facebook and save to the database. 
-- Basic messaging
-- Remote hosted property images
-- Favorites
-- Font Awesome icons 
-
 ## Pages
 - Facebook social login page 
 - Top navigation bar with RoomMe icon, Profile, Listings, Add Listing and Login nav links
