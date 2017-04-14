@@ -22,9 +22,6 @@ namespace GroupProject.Controllers
         [HttpGet]
         public IHttpActionResult GetUserMessages(int id)
         {
-            //IQueryable<Message> allMessages = db.Messages;
-
-            //var convId = db.Conversations.Select(c => c.ConversationId).Where(c => c.ReceiverUserId == id);
 
             var allMessages = from d in db.Conversations
                               where d.ReceiverUserId == id
@@ -40,16 +37,6 @@ namespace GroupProject.Controllers
                                   receiverId = d.ReceiverUserId,
                                   receiverPic = d.Receiver.ProfilePic
                               };
-                              //select d.Messages;
-                                                
-
-
-            //allMessages = allMessages.Contains(m => m.ConversationId == convIds);
-
-            //allMessages = from m in db.Messages
-            //              where( from d in db.Conversations select d.ConversationId)
-            //              .Contains( d.ReceiverUserId == id)
-            //              select m;
 
             return Ok(allMessages);
         }
