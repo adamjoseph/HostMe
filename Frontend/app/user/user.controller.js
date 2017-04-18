@@ -70,16 +70,13 @@
                             $state.go('profile');
                         } else {
                             successLogin(user[0].userId, user[0].firstName);
-                            // localStorageFactory.setKey('storedUserId', user[0].userId);
-                            // SweetAlert.swal("Welcome Back " + user[0].firstName, "", "success");
-                            // $rootScope.logIn();
-                            // $state.go('search');
+
                         }
                     },
                     function(error) {
                         console.log(error);
                     });
-            }) //close rootScope
+            }) 
 
 
         //Add user with FB response data
@@ -175,7 +172,6 @@
 
             var storedUserId = localStorageFactory.getKey("storedUserId");
             //add updated profile pic
-            // user.profilePic = uc.picUrl;
 
             UserFactory.updateUser(storedUserId, user).then(
                 function(response) {
