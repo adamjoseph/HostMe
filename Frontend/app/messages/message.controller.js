@@ -81,14 +81,6 @@
               console.log("conversation error");
             }
           )
-
-
-
-
-
-
-
-
         }//close replyMessage
 
     }
