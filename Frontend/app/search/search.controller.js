@@ -69,22 +69,6 @@
             }
         } //closes addFavorites
 
-
-        //Trying to scroll to search results
-
-        // sc.scrollTo = function(id) {
-        //     $document
-        //         .scrollToElement(
-        //             angular.element(document.getElementById(id)), 0, 1000);
-
-        // }
-
-
-
-
-
-
-
         function getFavorites(){
 
           var id = localStorageFactory.getKey("storedUserId");
@@ -98,7 +82,5 @@
             }
           )
         }//close getFavorites
-
-
     }
 })();
