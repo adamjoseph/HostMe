@@ -78,20 +78,10 @@
                 // rootScope handler for when user changes states
 
                 $rootScope.$on('$stateChangeStart', function() { //event, toState, toParams, fromState, from Params
-                //  var userNav = $rootScope.userNav;
                     // check if user id is stored
                     var isLogin = localStorageFactory.getKey("storedUserId");
                     if (isLogin === null) {
-                      // userNav = false
-                      // console.log(isLogin);
-                      // console.log(userNav);
-                        // userNav = false;
                         $location.path('/signin');
-                    }
-                    else {
-                      // userNav = true
-                      // console.log(isLogin);
-                      // console.log(userNav);
                     }
                 })
 
