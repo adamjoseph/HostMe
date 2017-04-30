@@ -68,8 +68,6 @@
                     controller: "SearchController",
                     controllerAs: "sc"
                 })
-
-
         })
         .run(function($rootScope,
                 localStorageFactory,
@@ -77,7 +75,7 @@
                 $location) {
                 // rootScope handler for when user changes states
 
-                $rootScope.$on('$stateChangeStart', function() { //event, toState, toParams, fromState, from Params
+                $rootScope.$on('$stateChangeStart', function() {
                     // check if user id is stored
                     var isLogin = localStorageFactory.getKey("storedUserId");
                     if (isLogin === null) {
